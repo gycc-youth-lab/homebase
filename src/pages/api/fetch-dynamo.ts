@@ -13,31 +13,32 @@ const db = new DynamoDBClient({
 });
 
 const FetchDynamo = async (req: NextApiRequest, res: NextApiResponse) => {
-    const {lastEvaluatedKey, bucketName } = req.query;
-    if (typeof bucketName !== 'string') {
+    if (!req.query.bucketName) {
         res.status(400).json({ error: 'bucketName is required' });
         return
     }
+    const lastEvaluatedKey = req.query.lastEvaluatedKey as string | null;
+    const bucketName = req.query.bucketName as string;
     const queryParams: {
         TableName: string;
         Limit: number;
         KeyConditionExpression: string;
         ExpressionAttributeValues: { ":bucketName": { S: string } };
-        ExclusiveStartKey?: { filePath: { S: string }, bucketName: { S: string } };
+        ScanIndexForward: boolean;
+        ExclusiveStartKey?: { uuid: { S: string }, bucketName: { S: string } };
     } = {
-        TableName: 'GYCC-db-metadata',
+        TableName: 'gycc-db-metadata',
         Limit: 16,
         KeyConditionExpression: "bucketName = :bucketName",
         ExpressionAttributeValues: {
             ":bucketName": { S: bucketName },
         },
+        ScanIndexForward: true,
     }
-    // if (lastEvaluatedKey) {
-    //     queryParams.ExclusiveStartKey = { id: { S: lastEvaluatedKey as string } }
-    // }
-    queryParams.ExclusiveStartKey = { filePath: { S: '1.jpg' }, bucketName: { S: 'gycc-2023' } }
+    if (lastEvaluatedKey) {
+        queryParams.ExclusiveStartKey = { uuid: {S: lastEvaluatedKey}, bucketName: {S: bucketName} }
+    }
     try {
-        // const command = new ScanCommand(params);
         const command = new QueryCommand(queryParams);
         const {Items, LastEvaluatedKey } = await db.send(command);
         const imageObj = Items?.map((item) => unmarshall(item));

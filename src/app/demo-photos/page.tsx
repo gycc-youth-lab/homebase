@@ -18,9 +18,10 @@ const DemoPhotosPage: React.FC = () => {
                     throw new Error('Failed to fetch data');
                 }
                 const { images, lastEvaluatedKey } = await response.json();
+                const lastUUID = lastEvaluatedKey?.uuid.S
                 const urls: string[] = images.map((obj: { url: string }) => obj.url);
                 setImageUrls(urls);
-                setLastKey(lastEvaluatedKey);
+                setLastKey(lastUUID);
             } catch (error) {
                 console.error('Error fetching image URLs:', error);
             } finally {
