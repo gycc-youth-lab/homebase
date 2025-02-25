@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 const DemoPhotosPage: React.FC = () => {
     const [imageUrls, setImageUrls] = useState<string[]>([]);
+    const [lastKey, setLastKey] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(true);
 
 
@@ -16,9 +17,10 @@ const DemoPhotosPage: React.FC = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
-                const data = await response.json();
-                const urls: string[] = data.map((obj: { url: string }) => obj.url);
+                const { images, lastEvaluatedKey } = await response.json();
+                const urls: string[] = images.map((obj: { url: string }) => obj.url);
                 setImageUrls(urls);
+                setLastKey(lastEvaluatedKey);
             } catch (error) {
                 console.error('Error fetching image URLs:', error);
             } finally {

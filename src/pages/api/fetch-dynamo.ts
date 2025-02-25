@@ -23,25 +23,29 @@ const FetchDynamo = async (req: NextApiRequest, res: NextApiResponse) => {
         Limit: number;
         KeyConditionExpression: string;
         ExpressionAttributeValues: { ":bucketName": { S: string } };
-        ExclusiveStartKey?: { id: { S: string } };
+        ExclusiveStartKey?: { filePath: { S: string }, bucketName: { S: string } };
     } = {
         TableName: 'GYCC-db-metadata',
-        Limit: 20,
+        Limit: 16,
         KeyConditionExpression: "bucketName = :bucketName",
         ExpressionAttributeValues: {
-            ":bucketName": { S: bucketName }, // TODO: use bucket name passed in by component
+            ":bucketName": { S: bucketName },
         },
     }
-    if (lastEvaluatedKey) {
-        queryParams.ExclusiveStartKey = { id: { S: lastEvaluatedKey as string } }
-    }
+    // if (lastEvaluatedKey) {
+    //     queryParams.ExclusiveStartKey = { id: { S: lastEvaluatedKey as string } }
+    // }
+    queryParams.ExclusiveStartKey = { filePath: { S: '1.jpg' }, bucketName: { S: 'gycc-2023' } }
     try {
         // const command = new ScanCommand(params);
         const command = new QueryCommand(queryParams);
-        const {Items} = await db.send(command);
-        const data = Items?.map((item) => unmarshall(item));
-        console.log('Fetched data');
-        res.status(200).json(data);
+        const {Items, LastEvaluatedKey } = await db.send(command);
+        const imageObj = Items?.map((item) => unmarshall(item));
+        const returnData = {
+            images: imageObj,
+            lastEvaluatedKey: LastEvaluatedKey || null
+        }
+        res.status(200).json(returnData);
     } catch (error) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         res.status(500).json({ 'error': (error as any).message });
