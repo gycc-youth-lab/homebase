@@ -15,37 +15,26 @@ type Props = {
 const PhotoGallery: React.FC<Props> = ({ bucketName }) => {
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [lastKey, setLastKey] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [isComplete, setIsComplete] = useState<boolean>(false);
     const hasFetched = useRef(false);
 
     // for modal
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const fetchPhotos = async () => {
-        if (isComplete) {
-            return;
-        }
         setLoading(true);
         try {
-            let apiUrl = `/api/fetch-dynamo?bucketName=${bucketName}`;
-            if (lastKey) {
-                apiUrl += `&lastEvaluatedKey=${lastKey}`;
-            }
+            const apiUrl = `/api/fetch-dynamo?bucketName=${bucketName}`;
+
             const response = await fetch(apiUrl, {
                 method: 'GET',
             });
             if (!response.ok) {
                 setError('Failed to fetch photos');
             }
-            const { images, lastEvaluatedKey } = await response.json();
-            const lastUUID = lastEvaluatedKey?.uuid.S;
-            if (!lastUUID) {
-                setIsComplete(true);
-            }
-            setPhotos((prevPhotos) => [...prevPhotos, ...images]);
-            setLastKey(lastUUID);
+            const { images, count } = await response.json();
+
+            setPhotos(images);
         } catch (err) {
             console.error('Error fetching photos:', err);
             setError('Failed to fetch photos');
@@ -84,7 +73,6 @@ const PhotoGallery: React.FC<Props> = ({ bucketName }) => {
                 </ModalContent>
             </Modal>
             {loading && <div>Loading...</div>}
-            {!loading && !isComplete && <button onClick={fetchPhotos}>Load More</button>}
         </div>
     );
 };
