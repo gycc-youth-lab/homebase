@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Card, Modal, ModalContent, Image as HeroUiImage } from "@heroui/react";
+import Image from 'next/image';
 
 interface Photo {
     uuid: string;
@@ -17,6 +19,9 @@ const PhotoGallery: React.FC<Props> = ({ bucketName }) => {
     const [error, setError] = useState<string | null>(null);
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const hasFetched = useRef(false);
+
+    // for modal
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const fetchPhotos = async () => {
         if (isComplete) {
@@ -62,12 +67,22 @@ const PhotoGallery: React.FC<Props> = ({ bucketName }) => {
     }
 
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div className='grid grid-cols-4 gap-4 p-4'>
             {photos.map(photo => (
-                <div key={photo.uuid} className="photo-item">
-                    <img src={photo.url} alt={photo.filePath} style={{ width: '200px', height: '200px', margin: '10px' }} />
-                </div>
+                <Card key={photo.uuid} isPressable
+                    onPress={() => setSelectedImage(photo.url)}
+                    className="relative w-full aspect-square overflow-hidden">
+                    <Image fill src={photo.url} alt={photo.filePath}
+                        className="w-full h-full object-cover" />
+                </Card>
             ))}
+
+            {/* Lightbox Modal */}
+            <Modal isOpen={!!selectedImage} onOpenChange={() => setSelectedImage(null)} size="lg">
+                <ModalContent>
+                    {selectedImage && <HeroUiImage src={selectedImage} alt="Enlarged image" width="100%" height="auto" />}
+                </ModalContent>
+            </Modal>
             {loading && <div>Loading...</div>}
             {!loading && !isComplete && <button onClick={fetchPhotos}>Load More</button>}
         </div>
