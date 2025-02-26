@@ -17,34 +17,29 @@ const FetchDynamo = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(400).json({ error: 'bucketName is required' });
         return
     }
-    const lastEvaluatedKey = req.query.lastEvaluatedKey as string | null;
     const bucketName = req.query.bucketName as string;
     const queryParams: {
         TableName: string;
-        Limit: number;
         KeyConditionExpression: string;
         ExpressionAttributeValues: { ":bucketName": { S: string } };
         ScanIndexForward: boolean;
-        ExclusiveStartKey?: { uuid: { S: string }, bucketName: { S: string } };
     } = {
         TableName: 'gycc-db-metadata',
-        Limit: 16,
         KeyConditionExpression: "bucketName = :bucketName",
         ExpressionAttributeValues: {
             ":bucketName": { S: bucketName },
         },
         ScanIndexForward: true,
     }
-    if (lastEvaluatedKey) {
-        queryParams.ExclusiveStartKey = { uuid: {S: lastEvaluatedKey}, bucketName: {S: bucketName} }
-    }
     try {
         const command = new QueryCommand(queryParams);
-        const {Items, LastEvaluatedKey } = await db.send(command);
-        const imageObj = Items?.map((item) => unmarshall(item));
+        const {Items } = await db.send(command);
+        const imageObj = Items?.map((item) => unmarshall(item)) || [];
+        const count = imageObj?.length;
+        imageObj.sort((a, b) => (a.filePath.split('.')[0]) - (b.filePath.split('.')[0])) // sort by fileName number
         const returnData = {
             images: imageObj,
-            lastEvaluatedKey: LastEvaluatedKey || null
+            count,
         }
         res.status(200).json(returnData);
     } catch (error) {
