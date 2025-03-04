@@ -6,7 +6,7 @@ export default function App() {
   return (
       <Navbar shouldHideOnScroll className="bg-white">
         <NavbarBrand>
-          <Image src="/logo.png" alt="GYCC Logo" width={36} height={36} className="w-[175px] h-[25x]"/>
+          <Image src="/logo.png" alt="GYCC Logo" width={36} height={36} className="w-[175px] h-[25px]"/>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-8">
           <NavbarItem>
