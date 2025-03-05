@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { HeroUIProvider } from "@heroui/react";
+import Container from '@/components/Container';
+import Footer from '@/components/Footer/Footer';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +32,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <HeroUIProvider>
-          {children}
+          <div className="flex flex-col min-h-screen">
+            <Container className="flex-grow">
+              {children}
+            </Container>
+            <Footer />
+          </div>
         </HeroUIProvider>
       </body>
     </html>
