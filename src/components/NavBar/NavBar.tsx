@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export default function App() {
   return (
-      <Navbar shouldHideOnScroll className="bg-white">
-        <NavbarBrand>
-          <Image src="/logo.png" alt="GYCC Logo" width={36} height={36} className="w-[175px] h-[25px]"/>
+      <Navbar shouldHideOnScroll className="flex items-center justify-start bg-white">
+        <NavbarBrand className="flex-grow-0 basis-auto">
+          <Image src="/logo.png" alt="GYCC Logo" width={200} height={40} className="w-[200px] h-[40px]"/>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-8">
           <NavbarItem>
@@ -28,3 +28,5 @@ export default function App() {
       </Navbar>
   );
 }
+
+
