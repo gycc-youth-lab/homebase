@@ -1,4 +1,4 @@
-name: Deploy Next.js
+name: Pull Request Check
 
 on:
   pull_request:
