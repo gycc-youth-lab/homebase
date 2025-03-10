@@ -1,4 +1,4 @@
-name: Deploy Next.js to Vercel
+name: Deploy Next.js
 
 on:
   push:
@@ -27,10 +27,3 @@ jobs:
 
       - name: Build Next.js App
         run: npm run build
-      
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: ${{ github.event_name == 'push' && '--prod' || '' }}
