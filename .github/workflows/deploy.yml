@@ -3,9 +3,6 @@ name: Deploy Next.js
 on:
   push:
     branches:
-      - '**'
-  pull_request:
-    branches:
       - main
 
 jobs:
@@ -30,3 +27,6 @@ jobs:
 
       - name: Build Next.js App
         run: npm run build
+
+      - name: Deploy to Vercel with Deploy Hook
+        run: curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_cr81JDoW1TWfXb4cRFOEgDBjX7fA/LSoNE3wVXx
