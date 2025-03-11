@@ -3,7 +3,7 @@ name: Deploy Homebase to Vercel
 on:
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   build-and-deploy:
@@ -22,11 +22,8 @@ jobs:
       - name: Install Dependencies
         run: npm install --frozen-lockfile
 
-      - name: Run ESLint (Code Quality Check)
-        run: npm run lint
+      - name: Run ESLint, Reject on Error (Code Quality Check)
+        run: npm run lint -- --max-warnings=0
 
       - name: Build Next.js App
         run: npm run build
-
-      - name: Deploy to Vercel with Deploy Hook
-        run: curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_cr81JDoW1TWfXb4cRFOEgDBjX7fA/LSoNE3wVXx
