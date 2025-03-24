@@ -1,37 +1,45 @@
 import Image from 'next/image'
+import { Button } from "@heroui/react";
+import top from "@images/homepage/main_2025.png"
+import mid from "@images/homepage/main_sl01_2.png"
+import bottom from "@images/homepage/main_2025_2.png"
 
 export const carouselItems = [
-    // Example with image
-    <div key="item1" className="relative w-full h-full">
-        <Image src="/placeholder.svg?height=400&width=800" alt="Slide 1" fill className="object-cover" />
-        <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/70 to-transparent">
-            <h3 className="text-white text-2xl font-bold">Slide 1</h3>
-        </div>
-    </div>,
-
-    // Example with iframe
-    <div key="item2" className="w-full h-full">
+    // Frame 1: AZ highlights with iframe
+    (<div key="item1" className="w-full h-full">
+        <h1 className="text-3xl font-bold text-black text-center">P4G 2023 Highlights</h1>
         <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src="https://www.youtube.com/embed/nexYsCih648?si=lbFknI_hpWzEvZjq"
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
         />
-    </div>,
+        <Button className="" size='md'>Find Out More</Button>
+    </div>),
 
-    // Example with multiple images
-    <div key="item3" className="grid grid-cols-2 gap-2 w-full h-full p-4">
-        <div className="relative aspect-square">
-            <Image src="/placeholder.svg?height=300&width=300" alt="Gallery 1" fill className="object-cover rounded-lg" />
+    // Frame 2: p4g Hanoi
+    (
+        <div key="item2" className='pt-4 w-full h-full flex flex-col items-center justify-center'>
+            <div>
+                <Image className="mb-5" width={500} height={100} src={top} alt="GYCC 2025" />
+                <Image className="mb-5" width={500} height={100} src={mid} alt="Slogan 2025" />
+                <Image className="mb-5" width={500} height={100} src={bottom} alt="P4G 2025 " />
+            </div>
+            <Button className="" size='md'>Find Out More</Button>
         </div>
-        <div className="relative aspect-square">
-            <Image src="/placeholder.svg?height=300&width=300" alt="Gallery 2" fill className="object-cover rounded-lg" />
+    ),
+
+    // Introduction to GYCC
+    (
+        <div key="item3" className="w-full h-full">
+            <h1 className="text-3xl font-bold text-black text-center">Introduction to GYCC</h1>
+            <iframe
+                src="https://www.youtube.com/embed/DKKGjM-ehQo?si=oW2hpzvR_gnTw-KA"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+            />
+            <Button className="" size='md'>Find Out More</Button>
         </div>
-        <div className="relative aspect-square">
-            <Image src="/placeholder.svg?height=300&width=300" alt="Gallery 3" fill className="object-cover rounded-lg" />
-        </div>
-        <div className="relative aspect-square">
-            <Image src="/placeholder.svg?height=300&width=300" alt="Gallery 4" fill className="object-cover rounded-lg" />
-        </div>
-    </div>,
+    ),
 ]

@@ -12,7 +12,7 @@ interface CarouselProps {
     autoPlayInterval?: number
 }
 
-export default function Carousel({ items = carouselItems, autoPlay = true, autoPlayInterval = 3000 }: CarouselProps) {
+export default function Carousel({ items = carouselItems, autoPlay = false, autoPlayInterval = 3000 }: CarouselProps) {
     const [activeIndex, setActiveIndex] = useState(0)
     const touchStartX = useRef<number | null>(null)
     const touchEndX = useRef<number | null>(null)
