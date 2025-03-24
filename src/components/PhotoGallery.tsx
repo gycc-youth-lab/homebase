@@ -32,7 +32,7 @@ const PhotoGallery: React.FC<Props> = ({ bucketName }) => {
             if (!response.ok) {
                 setError('Failed to fetch photos');
             }
-            const { images, count } = await response.json();
+            const { images } = await response.json();
 
             setPhotos(images);
         } catch (err) {
