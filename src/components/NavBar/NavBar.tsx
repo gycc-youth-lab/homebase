@@ -20,19 +20,18 @@ const Logo = () => (
 )
 
 export default function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent>
-        <NavbarBrand className="sm:flex-grow-0 basis-auto">
-          <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className='sm:hidden' />
+    <Navbar onMenuOpenChange={setIsMenuOpen} className='h-20'>
+      <NavbarContent className='!basis-auto !grow-0'>
+        <NavbarBrand className="gap-4 basis-auto grow-0">
+          <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className='min-[915px]:hidden h-20' />
           <Logo />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-8" justify='center'>
+      <NavbarContent className="hidden min-[915px]:flex gap-8" justify='center'>
         {menuItems.map((item, index) => (
           <NavbarItem key={index}>
             <Link
@@ -44,17 +43,13 @@ export default function NavBar() {
           </NavbarItem>
         ))}
       </NavbarContent>
-      {/* {Not implementing log in feature until further notice} */}
-      {/* <NavbarContent justify='end'>
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
+      <NavbarContent justify='end'>
         <NavbarItem>
           <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
+            Donate
           </Button>
         </NavbarItem>
-      </NavbarContent> */}
+      </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={index}>
