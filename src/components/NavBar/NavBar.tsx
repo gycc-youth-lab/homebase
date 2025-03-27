@@ -23,10 +23,10 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className='h-20'>
+    <Navbar onMenuOpenChange={setIsMenuOpen} className='h-16'>
       <NavbarContent className='!basis-auto !grow-0'>
         <NavbarBrand className="gap-4 basis-auto grow-0">
-          <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className='min-[915px]:hidden h-20' />
+          <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} className='min-[915px]:hidden h-16' />
           <Logo />
         </NavbarBrand>
       </NavbarContent>
