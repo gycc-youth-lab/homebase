@@ -66,7 +66,7 @@ export default function Carousel({ items = carouselItems, autoPlay = false, auto
     }, [activeIndex, autoPlay, autoPlayInterval])
 
     return (
-        <div className="relative w-full h-full">
+        <div className="relative m-auto w-full h-full max-w-xl">
             <div
                 className="overflow-hidden w-full h-full"
                 onTouchStart={onTouchStart}
@@ -78,9 +78,9 @@ export default function Carousel({ items = carouselItems, autoPlay = false, auto
                     style={{ transform: `translateX(-${activeIndex * 100}%)` }}
                 >
                     {items.map((item, index) => (
-                        <div key={index} className="w-full h-full flex-shrink-0">
-                            <Card className="w-full h-full">
-                                <CardBody className="p-0 overflow-hidden">{item}</CardBody>
+                        <div key={index} className="w-full h-full flex flex-shrink-0">
+                            <Card className="w-11/12 h-5/6 align-middle m-auto" shadow="sm">
+                                <CardBody className="p-6 overflow-hidden">{item}</CardBody>
                             </Card>
                         </div>
                     ))}
@@ -113,7 +113,7 @@ export default function Carousel({ items = carouselItems, autoPlay = false, auto
                 {items.map((_, index) => (
                     <button
                         key={index}
-                        className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all ${index === activeIndex ? "bg-white scale-110" : "bg-white/50"
+                        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all ${index === activeIndex ? "bg-[#0664a5]" : "bg-[#92a5bb]"
                             }`}
                         onClick={() => setActiveIndex(index)}
                         aria-label={`Go to slide ${index + 1}`}

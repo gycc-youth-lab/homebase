@@ -6,11 +6,11 @@ import bottom from "@images/homepage/main_2025_2.png"
 
 export const carouselItems = [
     // Frame 1: AZ highlights with iframe
-    (<div key="item1" className="w-full h-full">
-        <h1 className="text-3xl font-bold text-black text-center">P4G 2023 Highlights</h1>
+    (<div key="item1" className="w-full h-full flex flex-col items-center justify-center gap-2">
+        <h1 className="text-3xl font-bold text-black text-center">COP29, Azerbaijan Highlights</h1>
         <iframe
-            src="https://www.youtube.com/embed/nexYsCih648?si=lbFknI_hpWzEvZjq"
-            className="w-full h-full"
+            src="https://www.youtube.com/embed/aTBOqJG2A10?si=UcWYX505CGmjWC0L"
+            className="w-full h-[80%]"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
         />
@@ -31,11 +31,11 @@ export const carouselItems = [
 
     // Introduction to GYCC
     (
-        <div key="item3" className="w-full h-full">
+        <div key="item3" className="w-full h-full flex flex-col items-center justify-center gap-2">
             <h1 className="text-3xl font-bold text-black text-center">Introduction to GYCC</h1>
             <iframe
                 src="https://www.youtube.com/embed/DKKGjM-ehQo?si=oW2hpzvR_gnTw-KA"
-                className="w-full h-full"
+                className="w-full h-[80%]"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             />
