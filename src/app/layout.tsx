@@ -19,7 +19,7 @@ const dm_sans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "GYCC Youth Lab",
-  description: "Official Website by GYCC Youth Lab est. 2020",
+  description: "GYCC Youth Lab est. 2020",
 };
 
 export default function RootLayout({
@@ -28,9 +28,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${dm_sans.variable}`}>
       <body
-        className={`${dm_sans.className} ${inter.className} antialiased`}
+        className="antialiased"
       >
         <HeroUIProvider>
           <div className="flex flex-col min-h-screen">
