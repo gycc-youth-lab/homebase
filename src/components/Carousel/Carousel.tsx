@@ -66,9 +66,9 @@ export default function Carousel({ items = carouselItems, autoPlay = false, auto
     }, [activeIndex, autoPlay, autoPlayInterval])
 
     return (
-        <div className="relative m-auto w-full h-full max-w-xl">
+        <div className="relative flex flex-row m-auto w-full h-full max-w-3xl">
             <div
-                className="overflow-hidden w-full h-full"
+                className="order-2 overflow-hidden w-full h-full"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
@@ -90,20 +90,22 @@ export default function Carousel({ items = carouselItems, autoPlay = false, auto
             {/* Responsive navigation buttons */}
             <Button
                 isIconOnly
-                className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white/40 backdrop-blur-md hover:bg-white/60 z-10 w-8 h-8 sm:w-10 sm:h-10"
+                className="order-1 left-1 sm:left-2 top-1/2 -translate-y-1/2 bg-white/40 backdrop-blur-md hover:bg-white/60 z-10"
                 onPress={handlePrev}
                 size="sm"
                 radius="full"
+                variant="bordered"
             >
                 <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
 
             <Button
                 isIconOnly
-                className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white/40 backdrop-blur-md hover:bg-white/60 z-10 w-8 h-8 sm:w-10 sm:h-10"
+                className="order-3 right-1 sm:right-2 top-1/2 -translate-y-1/2 bg-white/40 backdrop-blur-md hover:bg-white/60 z-10"
                 onPress={handleNext}
                 size="sm"
                 radius="full"
+                variant="bordered"
             >
                 <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
