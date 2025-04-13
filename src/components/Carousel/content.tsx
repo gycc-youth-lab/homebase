@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Button } from "@heroui/react";
+import { Button } from "@/components/Button";
 import top from "@images/homepage/main_2025.png"
 import mid from "@images/homepage/main_sl01_2.png"
 import bottom from "@images/homepage/main_2025_2.png"
@@ -39,7 +39,7 @@ export const carouselItems = [
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             />
-            <Button className="" size='md'>Find Out More</Button>
+            <Button size='md'>Find Out More</Button>
         </div>
     ),
 ]
