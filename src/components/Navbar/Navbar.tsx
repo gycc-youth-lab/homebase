@@ -12,19 +12,29 @@ import NavMenuButton from '@/components/NavMenuButton';
 import logo from '@images/logo.svg';
 
 interface NavItem {
-    label: string;
-    href: string;
+    label?: string;
+    href?: string;
     children?: NavItem[];
+    isDivider?: boolean;
 }
 
 const navigation: NavItem[] = [
     { label: 'Home', href: '/' },
     {
-        label: 'Gallery',
-        href: '/gallery',
+        label: 'Activities',
+        href: '/activities',
         children: [
-            { label: 'Photo Gallery', href: '/gallery/photos' },
-            { label: 'Video Gallery', href: '/gallery/videos' },
+            { label: 'P4G 2025 | Vietnam', href: '/' },
+            { label: 'COP 29 | Azerbaijan', href: '/' },
+            { label: 'GYCC 2024 | Korea ', href: '/' },
+            { isDivider: true },
+            { label: 'P4G 2023 | Colombia', href: '/' },
+            { label: 'COP 28 | Egypt', href: '/' },
+            { label: 'GYCC 2023 | Korea', href: '/' },
+            { isDivider: true },
+            { label: 'P4G 2021 | Korea', href: '/' },
+            { isDivider: true },
+            { label: 'GYCC 2020 | Korea', href: '/' }
         ],
     },
     {
@@ -66,11 +76,11 @@ const Navbar = () => {
                                 <div
                                     key={item.label}
                                     className="relative"
-                                    onMouseEnter={() => setActiveDropdown(item.label)}
+                                    onMouseEnter={() => setActiveDropdown(item.label ?? null)}
                                     onMouseLeave={() => setActiveDropdown(null)}
                                 >
                                     <Link
-                                        href={item.href}
+                                        href={item.href ?? '#'}
                                         className={cn(
                                             'flex items-center gap-1 px-1 py-2',
                                             'text-[#475467] hover:text-[#182230]',
@@ -84,15 +94,23 @@ const Navbar = () => {
                                     </Link>
                                     {item.children && activeDropdown === item.label && (
                                         <div className="absolute top-full left-0 w-48 py-2 bg-white rounded-lg shadow-lg border border-[#EAECF0]">
-                                            {item.children.map((child) => (
-                                                <Link
-                                                    key={child.label}
-                                                    href={child.href}
-                                                    className="block px-4 py-2 text-sm text-[#475467] hover:bg-[#F9FAFB] hover:text-[#182230]"
-                                                >
-                                                    {child.label}
-                                                </Link>
-                                            ))}
+                                            {item.children!.map(child =>
+                                                child.isDivider ? (
+                                                    <div
+                                                        key={Math.random()}
+                                                        className="my-2 border-t border-[#EAECF0]"
+                                                    />
+                                                ) : (
+                                                    <Link
+                                                        key={child.label}
+                                                        href={child.href!}
+                                                        className="block px-4 py-2 text-sm text-[#475467] hover:bg-[#F9FAFB] hover:text-[#182230]"
+                                                    >
+                                                        {child.label}
+                                                    </Link>
+                                                )
+                                            )}
+
                                         </div>
                                     )}
                                 </div>
@@ -140,7 +158,7 @@ const Navbar = () => {
                                     {navigation.map((item) => (
                                         <div key={item.label}>
                                             <Link
-                                                href={item.href}
+                                                href={item.href ?? '#'}
                                                 className={cn(
                                                     'flex items-center justify-between py-2',
                                                     'text-[#475467] hover:text-[#182230]',
@@ -155,16 +173,24 @@ const Navbar = () => {
                                             </Link>
                                             {item.children && (
                                                 <div className="pl-4 mt-2 space-y-2 border-l border-[#EAECF0]">
-                                                    {item.children.map((child) => (
-                                                        <Link
-                                                            key={child.label}
-                                                            href={child.href}
-                                                            className="block py-2 text-base text-[#475467] hover:text-[#182230]"
-                                                            onClick={() => setIsOpen(false)}
-                                                        >
-                                                            {child.label}
-                                                        </Link>
-                                                    ))}
+                                                    {item.children!.map(child =>
+                                                        child.isDivider ? (
+                                                            <div
+                                                                key={Math.random()}
+                                                                className="my-2 border-t border-[#EAECF0]"
+                                                            />
+                                                        ) : (
+                                                            <Link
+                                                                key={child.label}
+                                                                href={child.href!}
+                                                                onClick={() => setIsOpen(false)}
+                                                                className="block py-2 text-base text-[#475467] hover:text-[#182230]"
+                                                            >
+                                                                {child.label}
+                                                            </Link>
+                                                        )
+                                                    )}
+
                                                 </div>
                                             )}
                                         </div>
