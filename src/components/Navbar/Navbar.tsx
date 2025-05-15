@@ -40,8 +40,15 @@ const navigation: NavItem[] = [
     {
         label: 'Our Voice',
         children: [
-            { label: 'Articles', href: '/resources/articles' },
-            { label: 'News', href: '/resources/news' },
+            { label: 'Policy Proposals', href: '/resources/policy-proposals' },
+            { label: 'From Our Community', href: '/resources/community' },
+        ]
+    },
+    {
+        label: 'Media',
+        children: [
+            { label: 'Photos', href: '/media/photos' },
+            { label: 'Videos', href: '/media/videos' },
         ],
     },
     {
@@ -82,7 +89,7 @@ const Navbar = () => {
                                     onMouseEnter={() => setActiveDropdown(item.label ?? null)}
                                     onMouseLeave={() => setActiveDropdown(null)}
                                 >
-                                    <Link
+                                    {item.href ? <Link
                                         href={item.href ?? '#'}
                                         className={cn(
                                             'flex items-center gap-1 px-1 py-2',
@@ -94,7 +101,19 @@ const Navbar = () => {
                                         {item.children && (
                                             <ChevronDown className="w-4 h-4 text-[#475467]" />
                                         )}
-                                    </Link>
+                                    </Link> :
+                                        <div
+                                            className={cn(
+                                                'flex items-center gap-1 px-1 py-2',
+                                                'text-[#475467] hover:text-[#182230]',
+                                                'text-base font-semibold transition-colors'
+                                            )}
+                                        >
+                                            {item.label}
+                                            {item.children && (
+                                                <ChevronDown className="w-4 h-4 text-[#475467]" />
+                                            )}
+                                        </div>}
                                     {item.children && activeDropdown === item.label && (
                                         <div className="absolute top-full left-0 w-48 py-2 bg-white rounded-lg shadow-lg border border-[#EAECF0]">
                                             {item.children!.map((child, i) =>
