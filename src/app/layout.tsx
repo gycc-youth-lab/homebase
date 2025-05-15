@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { HeroUIProvider } from "@heroui/react";
+import Container from '@/components/Container';
+import Footer from '@/components/Footer/Footer';
+import Navbar from "@/components/Navbar";
+
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,7 +20,7 @@ const dm_sans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "GYCC Youth Lab",
-  description: "Official Website by GYCC Youth Lab est. 2020",
+  description: "GYCC Youth Lab est. 2020",
 };
 
 export default function RootLayout({
@@ -24,11 +29,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${dm_sans.variable}`}>
       <body
-        className={`${dm_sans.className} ${inter.className} antialiased`}
+        className="antialiased"
       >
-        {children}
+        <HeroUIProvider>
+          <>
+            <Navbar />
+            <Container className="pt-16 flex-grow">
+              {children}
+            </Container>
+            <Footer />
+          </>
+        </HeroUIProvider>
       </body>
     </html>
   );
