@@ -94,10 +94,10 @@ const Navbar = () => {
                                     </Link>
                                     {item.children && activeDropdown === item.label && (
                                         <div className="absolute top-full left-0 w-48 py-2 bg-white rounded-lg shadow-lg border border-[#EAECF0]">
-                                            {item.children!.map(child =>
+                                            {item.children!.map((child, i) =>
                                                 child.isDivider ? (
                                                     <div
-                                                        key={Math.random()}
+                                                        key={`divider-${i}`}
                                                         className="my-2 border-t border-[#EAECF0]"
                                                     />
                                                 ) : (
