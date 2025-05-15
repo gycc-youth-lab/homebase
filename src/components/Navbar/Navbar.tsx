@@ -38,14 +38,17 @@ const navigation: NavItem[] = [
         ],
     },
     {
-        label: 'Resources',
-        href: '/resources',
+        label: 'Our Voice',
         children: [
             { label: 'Articles', href: '/resources/articles' },
-            { label: 'Downloads', href: '/resources/downloads' },
+            { label: 'News', href: '/resources/news' },
         ],
     },
-    { label: 'Contact', href: '/contact' },
+    {
+        label: 'Donate',
+        href: '/donate'
+    },
+    { label: 'Join', href: '/contact' },
 ];
 
 const Navbar = () => {

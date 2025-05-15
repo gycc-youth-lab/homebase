@@ -35,7 +35,7 @@ const fontStyles = {
     content: 'font-content', // Inter
 };
 
-export const Typography = <C extends ElementType = 'p'>({
+const Typography = <C extends ElementType = 'p'>({
     variant = 'text-md',
     weight = 'regular',
     as,
