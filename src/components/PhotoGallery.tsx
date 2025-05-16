@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, Modal, ModalContent, Image as HeroUiImage, Pagination, Spinner, Button } from "@heroui/react";
+import { Card, Modal, ModalContent, Image as HeroUiImage, Pagination, Spinner } from "@heroui/react";
 import Image from 'next/image';
 import Link from 'next/link';
 
