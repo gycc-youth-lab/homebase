@@ -18,12 +18,6 @@ export default function Home() {
         <Container className="flex flex-col items-center gap-12">
           <div className="flex flex-col items-center gap-6 w-full">
             <div className="flex flex-col gap-3 w-full">
-              <TextMD
-                weight="semibold"
-                className="text-center text-[#1DADDF]"
-              >
-                About us
-              </TextMD>
               <DisplayLG
                 weight="semibold"
                 className="text-center text-[#101828]"

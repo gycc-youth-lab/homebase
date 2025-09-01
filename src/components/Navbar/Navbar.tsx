@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Container from '@/components/Container';
 import NavMenuButton from '@/components/NavMenuButton';
+import AuthButton from '@/components/AuthButton';
+
 
 import logo from '@images/logo.svg';
 
@@ -22,7 +24,6 @@ const navigation: NavItem[] = [
     { label: 'Home', href: '/' },
     {
         label: 'Activities',
-        href: '/activities',
         children: [
             { label: 'P4G 2025 | Vietnam', href: '/' },
             { label: 'COP 29 | Azerbaijan', href: '/' },
@@ -34,14 +35,14 @@ const navigation: NavItem[] = [
             { isDivider: true },
             { label: 'P4G 2021 | Korea', href: '/' },
             { isDivider: true },
-            { label: 'GYCC 2020 | Korea', href: '/' }
+            { label: 'GYCC 2020 | Korea', href: '/activities/gycc-2020' }
         ],
     },
     {
         label: 'Our Voice',
         children: [
-            { label: 'Policy Proposals', href: '/resources/policy-proposals' },
-            { label: 'From Our Community', href: '/resources/community' },
+            { label: 'Policy Proposals', href: '/our-voice/policy-proposals' },
+            { label: 'From Our Community', href: '/our-voice/community' },
         ]
     },
     {
@@ -55,7 +56,7 @@ const navigation: NavItem[] = [
         label: 'Donate',
         href: '/donate'
     },
-    { label: 'Join', href: '/contact' },
+    { label: 'Join', href: '/join' },
 ];
 
 const Navbar = () => {
@@ -139,21 +140,7 @@ const Navbar = () => {
                             ))}
                         </div>
 
-                        {/* Auth Buttons: not implemented yet */}
-                        {/* <div className="flex items-center gap-3">
-                            <Link
-                                href="/login"
-                                className="px-4 py-2 text-base font-semibold text-[#475467] hover:text-[#182230]"
-                            >
-                                Log in
-                            </Link>
-                            <Link
-                                href="/signup"
-                                className="px-4 py-2 text-base font-semibold text-white bg-primary hover:bg-primary-variant rounded-lg transition-colors"
-                            >
-                                Sign up
-                            </Link>
-                        </div> */}
+                        <AuthButton />
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -219,23 +206,9 @@ const Navbar = () => {
                                     ))}
                                 </div>
 
-                                {/* Mobile Auth Buttons: not implemented yet */}
-                                {/* <div className="space-y-3">
-                                    <Link
-                                        href="/signup"
-                                        className="block w-full py-2.5 px-4 text-center text-white bg-primary hover:bg-primary-variant rounded-lg font-semibold transition-colors"
-                                        onClick={() => setIsOpen(false)}
-                                    >
-                                        Sign up
-                                    </Link>
-                                    <Link
-                                        href="/login"
-                                        className="block w-full py-2.5 px-4 text-center text-[#475467] hover:text-[#182230] font-semibold"
-                                        onClick={() => setIsOpen(false)}
-                                    >
-                                        Log in
-                                    </Link>
-                                </div> */}
+                                <div className="pt-6">
+                                    <AuthButton />
+                                </div>
                             </div>
                         </Container>
                     </motion.div>
