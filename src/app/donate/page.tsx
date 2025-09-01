@@ -130,7 +130,7 @@ const DonatePage: React.FC = () => {
                                 Your generous contribution will directly support our mission to empower youth climate action worldwide. All donations are carefully managed to maximize impact.
                             </TextMD>
 
-                            <div className="w-full max-w-lg mt-6 p-8 border border-[#E4E7EC] rounded-xl bg-[#F9FAFB]">
+                            <div className="w-full max-w-lg mt-6 p-3 border border-[#E4E7EC] rounded-xl bg-[#F9FAFB]">
                                 <div className="flex flex-col gap-4 items-center">
                                     <TextLG weight="semibold" className="text-[#101828]">Bank Transfer Information</TextLG>
 
