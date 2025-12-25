@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Container from '@/components/Container';
 import NavMenuButton from '@/components/NavMenuButton';
-import AuthButton from '@/components/AuthButton';
 
 
 import logo from '@images/logo.svg';
@@ -21,7 +20,7 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-    { label: 'Home', href: '/' },
+    { label: 'Blog', href: '/blog' },
     {
         label: 'Activities',
         children: [
@@ -139,8 +138,6 @@ const Navbar = () => {
                                 </div>
                             ))}
                         </div>
-
-                        <AuthButton />
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -205,10 +202,6 @@ const Navbar = () => {
                                         </div>
                                     ))}
                                 </div>
-
-                                <div className="pt-6">
-                                    <AuthButton />
-                                </div>
                             </div>
                         </Container>
                     </motion.div>
@@ -218,4 +211,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar; 
+export default Navbar;

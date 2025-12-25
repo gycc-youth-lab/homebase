@@ -10,9 +10,6 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.750.0",
-    "@aws-sdk/client-s3": "^3.750.0",
-    "@aws-sdk/util-dynamodb": "^3.750.0",
     "@heroui/react": "^2.7.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -21,6 +18,7 @@
     "framer-motion": "^12.4.7",
     "heroui-cli": "^1.0.0",
     "lucide-react": "^0.477.0",
+    "mongodb": "^7.0.0",
     "next": "^15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -14,9 +14,9 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Header section based on Figma design */}
-      <section className="bg-white w-full py-24">
-        <Container className="flex flex-col items-center gap-12">
-          <div className="flex flex-col items-center gap-6 w-full">
+      <section className="bg-white w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-8 md:gap-12">
+          <div className="flex flex-col items-center gap-4 md:gap-6 w-full">
             <div className="flex flex-col gap-3 w-full">
               <DisplayLG
                 weight="semibold"
@@ -25,7 +25,7 @@ export default function Home() {
                 Global Youth Climate Challenge
               </DisplayLG>
             </div>
-            <TextMD className="text-center text-[#475467] max-w-3xl">
+            <TextMD className="text-center text-[#475467] max-w-3xl px-4 md:px-0">
               The Global Youth Climate Challenge is a worldwide initiative that empowers young people to take meaningful action against climate change through education, innovation, and community engagement.
             </TextMD>
           </div>
@@ -33,10 +33,10 @@ export default function Home() {
       </section>
 
       {/* Metrics section based on Figma design */}
-      <section className="bg-[#F9FAFB] w-full py-24">
-        <Container className="flex flex-row gap-16 items-stretch">
+      <section className="bg-[#F9FAFB] w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 items-stretch">
           {/* Image */}
-          <div className="flex-1 relative h-[500px]">
+          <div className="w-full lg:flex-1 relative h-[280px] sm:h-[350px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden">
             <Image
               src={groupImage}
               alt="Global Youth Climate Challenge group photo"
@@ -46,9 +46,9 @@ export default function Home() {
           </div>
 
           {/* Content */}
-          <div className="flex-1 flex flex-col gap-16">
+          <div className="w-full lg:flex-1 flex flex-col gap-8 md:gap-12 lg:gap-16">
             {/* Heading and subheading */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3 md:gap-5">
               <TextMD
                 weight="semibold"
                 className="text-[#1DADDF]"
@@ -64,9 +64,9 @@ export default function Home() {
             </div>
 
             {/* Metrics */}
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
               {/* Metric 1 */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1 sm:gap-2 md:gap-3">
                 <DisplayXL
                   weight="semibold"
                   className="text-[#1DADDF]"
@@ -82,7 +82,7 @@ export default function Home() {
               </div>
 
               {/* Metric 2 */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1 sm:gap-2 md:gap-3">
                 <DisplayXL
                   weight="semibold"
                   className="text-[#1DADDF]"
@@ -98,7 +98,7 @@ export default function Home() {
               </div>
 
               {/* Metric 3 */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1 sm:gap-2 md:gap-3">
                 <DisplayXL
                   weight="semibold"
                   className="text-[#1DADDF]"
@@ -114,7 +114,7 @@ export default function Home() {
               </div>
 
               {/* Metric 4 */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1 sm:gap-2 md:gap-3">
                 <DisplayXL
                   weight="semibold"
                   className="text-[#1DADDF]"
@@ -134,11 +134,11 @@ export default function Home() {
       </section>
 
       {/* Team section based on Figma design */}
-      <section className="bg-white w-full py-24">
-        <Container className="flex flex-col items-center gap-8">
+      <section className="bg-white w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-6 md:gap-8">
           {/* Heading section */}
-          <div className="flex flex-col items-center gap-5 max-w-3xl">
-            <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
+            <div className="flex flex-col gap-2 md:gap-3 w-full">
               <TextMD
                 weight="semibold"
                 className="text-center text-[#1DADDF]"
@@ -206,11 +206,11 @@ export default function Home() {
       </section>
 
       {/* Features/Values section based on Figma design */}
-      <section className="bg-[#F9FAFB] w-full py-24">
-        <Container className="flex flex-col items-center gap-8">
+      <section className="bg-[#F9FAFB] w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-6 md:gap-8">
           {/* Heading section */}
-          <div className="flex flex-col items-center gap-5 max-w-3xl">
-            <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
+            <div className="flex flex-col gap-2 md:gap-3 w-full">
               <TextMD
                 weight="semibold"
                 className="text-center text-[#1DADDF]"
@@ -269,11 +269,11 @@ export default function Home() {
       </section>
 
       {/* Recent Events section based on Figma design */}
-      <section className="bg-white w-full py-24">
-        <Container className="flex flex-col items-center gap-16">
+      <section className="bg-white w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
           {/* Heading section */}
-          <div className="flex flex-col items-center gap-5 max-w-3xl">
-            <div className="flex flex-col items-center gap-4 w-full">
+          <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
+            <div className="flex flex-col items-center gap-3 md:gap-4 w-full">
               <div className="bg-[#E0F4FA] border border-[#B0E2F2] rounded-2xl px-3 py-1">
                 <span className="text-[#1DADDF] font-medium text-sm">Recents</span>
               </div>
@@ -290,7 +290,7 @@ export default function Home() {
           </div>
 
           {/* Featured image */}
-          <div className="w-full h-[400px] relative rounded-xl overflow-hidden">
+          <div className="w-full h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] relative rounded-xl overflow-hidden">
             <Image
               src={p4gImage}
               alt="P4G Hanoi 2025 Event"
@@ -301,7 +301,7 @@ export default function Home() {
 
           {/* Posts section */}
           <div className="w-full">
-            <div className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 w-full">
               <TextXL
                 weight="semibold"
                 className="text-[#101828]"
@@ -331,11 +331,11 @@ export default function Home() {
       </section>
 
       {/* Contact section based on Figma design */}
-      <section className="bg-white w-full py-24">
-        <Container className="flex flex-col items-center gap-16">
+      <section className="bg-white w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
           {/* Heading section */}
-          <div className="flex flex-col items-center gap-5 max-w-3xl">
-            <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
+            <div className="flex flex-col gap-2 md:gap-3 w-full">
               <TextMD
                 weight="semibold"
                 className="text-center text-[#1DADDF]"
@@ -356,7 +356,9 @@ export default function Home() {
           </div>
 
           {/* Contact form */}
-          <JoinUsForm />
+          <div className="w-full flex justify-center px-4 md:px-0">
+            <JoinUsForm />
+          </div>
         </Container>
       </section>
     </main>

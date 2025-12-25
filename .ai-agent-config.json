@@ -1,0 +1,70 @@
+{
+  "agent_rules": {
+    "version": "1.0",
+    "description": "AI agent behavior configuration for GYCC project",
+    "exclusions": {
+      "directories": [
+        "gycc-php/dbeditor",
+        "gycc-php/dbeditor/**",
+        "**/node_modules",
+        "**/.git",
+        "**/vendor"
+      ],
+      "file_types": {
+        "media": {
+          "extensions": [
+            "mp4", "avi", "mov", "wmv", "flv", "webm", "mkv", "m4v",
+            "mp3", "wav", "ogg", "flac", "aac",
+            "jpg", "jpeg", "png", "gif", "bmp", "tiff", "svg", "webp", "ico"
+          ],
+          "action": "track_metadata_only"
+        },
+        "documents": {
+          "extensions": ["pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx"],
+          "action": "track_metadata_only"
+        },
+        "archives": {
+          "extensions": ["zip", "rar", "7z", "tar", "gz"],
+          "action": "track_metadata_only"
+        },
+        "sensitive": {
+          "patterns": [
+            "config.inc.php",
+            "*.config.php",
+            "database.php",
+            "credentials.*",
+            ".env*"
+          ],
+          "action": "exclude_completely"
+        }
+      }
+    },
+    "allowed_operations": {
+      "file_discovery": true,
+      "metadata_extraction": true,
+      "path_mapping": true,
+      "supabase_upload_planning": true,
+      "content_analysis": false,
+      "configuration_reading": false
+    },
+    "supabase_mapping": {
+      "storage_buckets": {
+        "media": {
+          "videos": "gycc-php/mp4*.html, gycc-php/**/videos/",
+          "images": "gycc-php/**/*.{jpg,jpeg,png,gif,svg}",
+          "audio": "gycc-php/**/*.{mp3,wav,ogg}"
+        },
+        "documents": "gycc-php/**/*.{pdf,doc,docx}",
+        "backups": {
+          "dbeditor": "gycc-php/dbeditor/ (metadata only)"
+        }
+      }
+    },
+    "security_notes": [
+      "Never expose database credentials",
+      "Log file operations without content details", 
+      "Maintain audit trail of file access attempts",
+      "Report policy violations to admin"
+    ]
+  }
+}
