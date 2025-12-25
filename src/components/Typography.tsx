@@ -15,10 +15,10 @@ const variantStyles = {
     'text-md': 'text-base leading-6', // 16px/24px
     'text-lg': 'text-lg leading-7', // 18px/28px
     'text-xl': 'text-xl leading-[30px]', // 20px/30px
-    'display-sm': 'text-[30px] leading-[38px]', // 30px/38px
-    'display-md': 'text-[36px] leading-[44px] tracking-[-0.02em]', // 36px/44px
-    'display-lg': 'text-[48px] leading-[60px] tracking-[-0.02em]', // 48px/60px
-    'display-xl': 'text-[60px] leading-[72px] tracking-[-0.02em]', // 60px/72px
+    'display-sm': 'text-2xl leading-8 md:text-[30px] md:leading-[38px]', // 24px->30px/32px->38px
+    'display-md': 'text-[28px] leading-9 md:text-[36px] md:leading-[44px] tracking-[-0.02em]', // 28px->36px
+    'display-lg': 'text-[32px] leading-10 md:text-[40px] md:leading-[50px] lg:text-[48px] lg:leading-[60px] tracking-[-0.02em]', // 32px->48px
+    'display-xl': 'text-[36px] leading-[44px] md:text-[48px] md:leading-[58px] lg:text-[60px] lg:leading-[72px] tracking-[-0.02em]', // 36px->60px
 };
 
 const weightStyles = {

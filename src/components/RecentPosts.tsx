@@ -9,32 +9,32 @@ interface PostCardProps {
 
 export const PostCard = ({ title, location, description, date }: PostCardProps) => {
     return (
-        <div className="border border-[#EAECF0] rounded-2xl p-6 hover:shadow-md transition-shadow">
-            <div className="flex flex-col gap-8">
+        <div className="border border-[#EAECF0] rounded-xl md:rounded-2xl p-4 md:p-6 hover:shadow-md transition-shadow">
+            <div className="flex flex-col gap-4 md:gap-8">
                 {/* Card content */}
                 <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-wrap">
                         <TextLG
                             weight="semibold"
-                            className="text-[#101828]"
+                            className="text-[#101828] text-base md:text-lg"
                         >
                             {title}
                         </TextLG>
-                        <span className="bg-white text-[#344054] text-sm font-medium border border-[#D0D5DD] rounded-md px-2 py-0.5 shadow-sm">
+                        <span className="bg-white text-[#344054] text-xs md:text-sm font-medium border border-[#D0D5DD] rounded-md px-2 py-0.5 shadow-sm w-fit">
                             {location}
                         </span>
                     </div>
-                    <TextMD className="text-[#475467]">
+                    <TextMD className="text-[#475467] text-sm md:text-base">
                         {description}
                     </TextMD>
                 </div>
 
                 {/* Date */}
                 <div className="flex items-center gap-2">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0">
                         <path d="M10.0001 5.00033V10.0003L13.3334 11.6670M18.3334 10.0003C18.3334 14.6027 14.6025 18.3337 10.0001 18.3337C5.39771 18.3337 1.66675 14.6027 1.66675 10.0003C1.66675 5.39795 5.39771 1.66699 10.0001 1.66699C14.6025 1.66699 18.3334 5.39795 18.3334 10.0003Z" stroke="#98A2B3" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <TextMD className="text-[#475467] font-medium">
+                    <TextMD className="text-[#475467] font-medium text-sm md:text-base">
                         {date}
                     </TextMD>
                 </div>

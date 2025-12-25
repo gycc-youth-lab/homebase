@@ -34,13 +34,11 @@ export default function RootLayout({
         className="antialiased"
       >
         <HeroUIProvider>
-          <>
-            <Navbar />
-            <Container className="pt-16 flex-grow">
-              {children}
-            </Container>
-            <Footer />
-          </>
+          <Navbar />
+          <Container className="pt-16 flex-grow">
+            {children}
+          </Container>
+          <Footer />
         </HeroUIProvider>
       </body>
     </html>

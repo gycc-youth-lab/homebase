@@ -1,0 +1,12 @@
+import { NextResponse } from 'next/server'
+
+export function middleware() {
+  // Add any global middleware logic here if needed
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
+}
