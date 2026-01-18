@@ -330,7 +330,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Contact section based on Figma design */}
+      {/* Newsletter Subscription section */}
       <section className="bg-white w-full py-12 md:py-16 lg:py-24">
         <Container className="flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
           {/* Heading section */}
@@ -340,24 +340,115 @@ export default function Home() {
                 weight="semibold"
                 className="text-center text-[#1DADDF]"
               >
-                Contact us
+                Stay Updated
               </TextMD>
               <DisplayMD
                 weight="semibold"
                 className="text-center text-[#101828]"
               >
-                Partner with us
+                Subscribe to Our Newsletter
               </DisplayMD>
             </div>
             <TextMD className="text-center text-[#475467]">
-              Hanabank 494-910024-19904 <br />
-              글로벌청년기후변화챌린지 Global Youth Climate Challenges
+              Get the latest updates on GYCC activities, events, and opportunities delivered straight to your inbox.
             </TextMD>
           </div>
 
-          {/* Contact form */}
+          {/* Newsletter form */}
           <div className="w-full flex justify-center px-4 md:px-0">
             <JoinUsForm />
+          </div>
+        </Container>
+      </section>
+
+      {/* Contact/Collaboration section */}
+      <section className="bg-[#F9FAFB] w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-6 md:gap-8">
+          <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
+            <div className="flex flex-col gap-2 md:gap-3 w-full">
+              <TextMD
+                weight="semibold"
+                className="text-center text-[#1DADDF]"
+              >
+                Get in Touch
+              </TextMD>
+              <DisplayMD
+                weight="semibold"
+                className="text-center text-[#101828]"
+              >
+                Partner with Us
+              </DisplayMD>
+            </div>
+            <TextMD className="text-center text-[#475467]">
+              Interested in collaborating with GYCC? We welcome partnerships with organizations, institutions, and individuals who share our vision for a sustainable future.
+            </TextMD>
+          </div>
+
+          {/* Contact card */}
+          <div className="bg-white rounded-xl shadow-sm border border-[#EAECF0] p-6 md:p-8 flex flex-col items-center gap-4 max-w-md">
+            <div className="w-14 h-14 bg-[#E0F4FA] rounded-full flex items-center justify-center">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="#1DADDF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <TextLG weight="semibold" className="text-[#101828]">
+              For Collaboration
+            </TextLG>
+            <TextMD className="text-center text-[#475467]">
+              Please reach out to us at
+            </TextMD>
+            <a
+              href="mailto:admin@gyccyouthlab.org"
+              className="text-[#1DADDF] font-semibold text-lg hover:text-[#028DBF] transition-colors"
+            >
+              admin@gyccyouthlab.org
+            </a>
+          </div>
+        </Container>
+      </section>
+
+      {/* Donation section */}
+      <section className="bg-white w-full py-12 md:py-16 lg:py-24">
+        <Container className="flex flex-col items-center gap-8 md:gap-12">
+          <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
+            <div className="flex flex-col gap-2 md:gap-3 w-full">
+              <TextMD
+                weight="semibold"
+                className="text-center text-[#1DADDF]"
+              >
+                Support Our Mission
+              </TextMD>
+              <DisplayMD
+                weight="semibold"
+                className="text-center text-[#101828]"
+              >
+                Make a Donation
+              </DisplayMD>
+            </div>
+            <TextMD className="text-center text-[#475467]">
+              Your contribution helps us empower youth climate action worldwide. Every donation makes a difference in building a sustainable future.
+            </TextMD>
+          </div>
+
+          {/* Donation info card */}
+          <div className="bg-[#F9FAFB] rounded-xl border border-[#EAECF0] p-6 md:p-8 flex flex-col items-center gap-6 max-w-lg w-full">
+            <div className="flex flex-col items-center gap-2 text-center">
+              <TextLG weight="semibold" className="text-[#101828]">
+                Bank Transfer
+              </TextLG>
+              <div className="text-[#475467]">
+                <p className="font-medium text-[#101828]">Hanabank 494-910024-19904</p>
+                <p className="text-sm mt-1">글로벌청년기후변화챌린지</p>
+                <p className="text-sm">Global Youth Climate Challenges</p>
+              </div>
+            </div>
+
+            <a
+              href="/donate"
+              className="w-full bg-[#028DBF] text-white font-semibold py-3 px-6 rounded-lg shadow-sm hover:bg-[#0278A4] transition-colors text-center"
+            >
+              Learn More About Donating
+            </a>
           </div>
         </Container>
       </section>
