@@ -20,7 +20,15 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-    { label: 'Blog', href: '/blog' },
+    {
+        label: 'GYCC',
+        children: [
+            { label: 'About', href: '/gycc/about' },
+            { label: 'Topics', href: '/gycc/topics' },
+            { label: 'Youth Lab', href: '/gycc/youth-lab' },
+            { label: 'Participants', href: '/gycc/participants' },
+        ],
+    },
     {
         label: 'Activities',
         children: [
@@ -44,6 +52,7 @@ const navigation: NavItem[] = [
             { label: 'From Our Community', href: '/our-voice/community' },
         ]
     },
+    { label: 'Blog', href: '/blog' },
     {
         label: 'Media',
         children: [
