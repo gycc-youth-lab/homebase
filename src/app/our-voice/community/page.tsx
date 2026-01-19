@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Container from '@/components/Container'
@@ -26,6 +26,46 @@ interface Pagination {
   totalCount: number
   hasNextPage: boolean
   hasPrevPage: boolean
+}
+
+// Component to handle image loading with fallback
+function PostThumbnail({ post }: { post: OurVoicePost }) {
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = useCallback(() => {
+    setImageError(true)
+  }, [])
+
+  // If we have a thumbnail and it hasn't errored, try to show it
+  if (post.thumbnail && !imageError) {
+    return (
+      <Image
+        src={`/images/ourvoice/${post.thumbnail}`}
+        alt={post.subject}
+        fill
+        className="object-cover group-hover:scale-105 transition-transform duration-300"
+        onError={handleImageError}
+      />
+    )
+  }
+
+  // If there's a video URL, show video placeholder
+  if (post.videoUrl) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-[#101828]">
+        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+          <div className="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1" />
+        </div>
+      </div>
+    )
+  }
+
+  // Default fallback
+  return (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <span className="text-[#98A2B3] text-4xl">📝</span>
+    </div>
+  )
 }
 
 export default function CommunityPage() {
@@ -130,31 +170,14 @@ export default function CommunityPage() {
                   href={`/our-voice/community/${post.slug}`}
                   className="group"
                 >
-                  <article className="h-full border border-[#EAECF0] rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 bg-white">
+                  <article className="h-full flex flex-col border border-[#EAECF0] rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 bg-white">
                     {/* Thumbnail */}
                     <div className="relative aspect-video bg-[#F2F4F7] overflow-hidden">
-                      {post.thumbnail ? (
-                        <Image
-                          src={`/images/ourvoice/${post.thumbnail}`}
-                          alt={post.subject}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : post.videoUrl ? (
-                        <div className="absolute inset-0 flex items-center justify-center bg-[#101828]">
-                          <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-                            <div className="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1" />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-[#98A2B3] text-4xl">📝</span>
-                        </div>
-                      )}
+                      <PostThumbnail post={post} />
                     </div>
 
                     {/* Content */}
-                    <div className="p-5 flex flex-col gap-3">
+                    <div className="p-5 flex flex-col gap-3 flex-1">
                       <h3 className="text-lg font-semibold text-[#101828] line-clamp-2 group-hover:text-[#1DADDF] transition-colors">
                         {post.subject}
                       </h3>
