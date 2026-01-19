@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,6 +8,32 @@ import Container from '@/components/Container'
 import { DisplayMD } from '@/components/Typography'
 import { ArrowLeft, Eye, Calendar } from 'lucide-react'
 import { ContentRenderer } from '@/lib/contentParser'
+
+// Component to handle featured image loading with fallback
+function FeaturedImage({ src, alt }: { src: string; alt: string }) {
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = useCallback(() => {
+    setImageError(true)
+  }, [])
+
+  if (imageError) {
+    return null
+  }
+
+  return (
+    <div className="relative aspect-video rounded-xl overflow-hidden bg-[#F2F4F7]">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        priority
+        onError={handleImageError}
+      />
+    </div>
+  )
+}
 
 interface OurVoicePost {
   id: string
@@ -145,15 +171,10 @@ export default function CommunityPostPage() {
                 />
               </div>
             ) : post.thumbnail ? (
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-[#F2F4F7]">
-                <Image
-                  src={`/images/ourvoice/${post.thumbnail}`}
-                  alt={post.subject}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
+              <FeaturedImage
+                src={`/images/ourvoice/${post.thumbnail}`}
+                alt={post.subject}
+              />
             ) : null}
 
             {/* Content */}

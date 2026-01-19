@@ -1,28 +1,39 @@
 import React from 'react'
 
-interface ParsedElement {
-  type: 'p' | 'br' | 'strong' | 'em' | 'a' | 'ul' | 'ol' | 'li' | 'blockquote' | 'h1' | 'h2' | 'h3' | 'text'
-  content?: string
-  children?: ParsedElement[]
-  href?: string
-}
-
 /**
  * Cleans up HTML entities and normalizes content
+ * Handles both standard HTML entities and PHP-style double-encoded entities
  */
 function cleanHtmlEntities(text: string): string {
   return text
-    // Remove &nbsp&#59; completely (malformed nbsp entities)
-    .replace(/&nbsp&#59;/g, '')
+    // First handle double-encoded entities (e.g., &nbsp&#59; where &#59; is the semicolon)
     .replace(/&#59;/g, ';')
-    // Remove regular &nbsp; as well
-    .replace(/&nbsp;/g, '')
+    // Remove &nbsp; (including any that were double-encoded)
+    .replace(/&nbsp;/g, ' ')
+    // Standard HTML entities
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&apos;/g, "'")
+    // Numeric HTML entities for common characters
+    .replace(/&#40;/g, '(')
+    .replace(/&#41;/g, ')')
+    .replace(/&#34;/g, '"')
+    .replace(/&#38;/g, '&')
+    .replace(/&#60;/g, '<')
+    .replace(/&#62;/g, '>')
+    .replace(/&#91;/g, '[')
+    .replace(/&#93;/g, ']')
+    .replace(/&#123;/g, '{')
+    .replace(/&#125;/g, '}')
+    .replace(/&#44;/g, ',')
+    .replace(/&#45;/g, '-')
+    .replace(/&#46;/g, '.')
+    .replace(/&#58;/g, ':')
+    // Generic numeric entity handler for any remaining entities
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(parseInt(code, 10)))
     // Clean up multiple spaces
     .replace(/\s+/g, ' ')
     .trim()
@@ -33,7 +44,6 @@ function cleanHtmlEntities(text: string): string {
  */
 function parseInlineContent(html: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = []
-  let remaining = html
   let key = 0
 
   // Pattern to match inline tags
@@ -113,10 +123,7 @@ export function parseHtmlContent(html: string): React.ReactNode[] {
   const elements: React.ReactNode[] = []
   let key = 0
 
-  // Split by block-level tags
-  const blockPattern = /<(p|h[1-6]|ul|ol|li|blockquote|div|br\s*\/?)([^>]*)>([^]*?)<\/\1>|<br\s*\/?>/gi
-  
-  // First, let's handle a simpler approach - split by paragraph tags
+  // Split by paragraph tags
   const paragraphs = html.split(/<\/?p[^>]*>/gi).filter(Boolean)
 
   for (const paragraph of paragraphs) {
