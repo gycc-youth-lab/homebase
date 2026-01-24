@@ -63,6 +63,7 @@ export async function GET(request: NextRequest) {
       id: post._id.toString(),
       subject: post.subject,
       content: post.content,
+      contentMD: post.contentMD || '',
       slug: post.subject
         .toLowerCase()
         .replace(/[^a-z0-9\s-]/g, '')

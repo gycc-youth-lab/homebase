@@ -102,11 +102,30 @@ export default function CommunityPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // Strip HTML tags for excerpt
-  const stripHtml = (html: string) => {
-    const tmp = document.createElement('div')
-    tmp.innerHTML = html
-    return tmp.textContent || tmp.innerText || ''
+  // Strip markdown/HTML for excerpt
+  const stripForExcerpt = (text: string) => {
+    if (!text) return ''
+    return text
+      // Remove images
+      .replace(/!\[.*?\]\(.*?\)/g, '')
+      // Remove links but keep text
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // Remove headers
+      .replace(/#{1,6}\s+/g, '')
+      // Remove bold/italic
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/_([^_]+)_/g, '$1')
+      // Remove code blocks
+      .replace(/```[\s\S]*?```/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      // Remove HTML tags
+      .replace(/<[^>]*>/g, '')
+      // Clean up whitespace
+      .replace(/\n+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
   }
 
   // Generate page numbers to display
@@ -184,7 +203,7 @@ export default function CommunityPage() {
                         {post.subject}
                       </h3>
                       <p className="text-sm text-[#475467] line-clamp-3">
-                        {stripHtml(post.content)}
+                        {stripForExcerpt(post.contentMD)}
                       </p>
                       <div className="flex items-center justify-between mt-auto pt-3 border-t border-[#EAECF0]">
                         <TextSM className="text-[#667085]">
