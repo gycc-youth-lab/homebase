@@ -32,15 +32,15 @@ const navigation: NavItem[] = [
     {
         label: 'Activities',
         children: [
-            { label: 'P4G 2025 | Vietnam', href: '/' },
-            { label: 'COP 29 | Azerbaijan', href: '/' },
-            { label: 'GYCC 2024 | Korea ', href: '/' },
+            { label: 'P4G 2025 | Vietnam', href: '/activities/gycc-2024?event=vietnam' },
+            { label: 'COP 29 | Azerbaijan', href: '/activities/gycc-2024?event=azerbaijan' },
+            { label: 'GYCC 2024 | Korea', href: '/activities/gycc-2024?event=korea' },
             { isDivider: true },
-            { label: 'P4G 2023 | Colombia', href: '/' },
-            { label: 'COP 28 | Egypt', href: '/' },
-            { label: 'GYCC 2023 | Korea', href: '/' },
+            { label: 'P4G 2023 | Colombia', href: '/activities/gycc-2023?event=colombia' },
+            { label: 'COP 28 | Egypt', href: '/activities/gycc-2023?event=egypt' },
+            { label: 'GYCC 2023 | Korea', href: '/activities/gycc-2023?event=korea' },
             { isDivider: true },
-            { label: 'P4G 2021 | Korea', href: '/' },
+            { label: 'P4G 2021 | Korea', href: '/activities/gycc-2021' },
             { isDivider: true },
             { label: 'GYCC 2020 | Korea', href: '/activities/gycc-2020' }
         ],

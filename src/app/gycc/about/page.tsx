@@ -70,9 +70,9 @@ const AboutPage: React.FC = () => {
                             </TextMD>
                             <TextMD className="text-[#475467]">
                                 Youth from around the world have gathered to share their thoughts and reach conclusions through{' '}
-                                <Link href="/activities" className="text-[#1DADDF] underline hover:text-[#028DBF]">(1) Team projects</Link>,{' '}
-                                <Link href="/activities/gycc-2022-23" className="text-[#1DADDF] underline hover:text-[#028DBF]">(2) youth networking</Link>, and{' '}
-                                <Link href="/our-voice/community" className="text-[#1DADDF] underline hover:text-[#028DBF]">(3) mentoring and lectures</Link>.
+                                (1) Team projects, {' '}
+                                <Link href="/gycc/youth-lab" className="text-[#1DADDF] underline hover:text-[#028DBF]">(2) youth networking</Link>, and{' '}
+                                (3) mentoring and lectures.
                             </TextMD>
                         </div>
                     </div>
