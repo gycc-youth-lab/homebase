@@ -2,13 +2,18 @@
 
 import Container from '@/components/Container';
 import { DisplayLG, DisplayMD, DisplayXL, TextLG, TextMD, TextXL } from '@/components/Typography';
-import { TeamMembersGrid } from '@/components/TeamMembers';
 import { ValuesGrid } from '@/components/Values';
 import { RecentPosts } from '@/components/RecentPosts';
 import JoinUsForm from '@/components/JoinUsForm';
 import Image from 'next/image';
+import Link from 'next/link';
 import groupImage from '@images/homepage/Image.png';
 import p4gImage from '@images/homepage/p4g-vn.jpg';
+
+const participantStats = [
+    { value: '300+', label: 'Total Participants' },
+    { value: '57', label: 'Countries' },
+];
 
 export default function Home() {
   return (
@@ -133,9 +138,9 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Team section based on Figma design */}
+      {/* Participants section */}
       <section className="bg-white w-full py-12 md:py-16 lg:py-24">
-        <Container className="flex flex-col items-center gap-6 md:gap-8">
+        <Container className="flex flex-col items-center gap-8 md:gap-12">
           {/* Heading section */}
           <div className="flex flex-col items-center gap-4 md:gap-5 max-w-3xl px-4 md:px-0">
             <div className="flex flex-col gap-2 md:gap-3 w-full">
@@ -143,65 +148,47 @@ export default function Home() {
                 weight="semibold"
                 className="text-center text-[#1DADDF]"
               >
-                Members
+                Our Community
               </TextMD>
               <DisplayMD
                 weight="semibold"
                 className="text-center text-[#101828]"
               >
-                Meet our team
+                Youth Participants
               </DisplayMD>
             </div>
             <TextMD className="text-center text-[#475467]">
-              We are a team of diverse, passionate youth and foster a culture that empowers youth to do your best work for the sustainable future.
+              Young climate advocates from around the world coming together to drive meaningful change for a sustainable future.
             </TextMD>
           </div>
 
-          {/* Team members grid */}
-          <TeamMembersGrid
-            members={[
-              {
-                name: "Dain Kim",
-                role: "Leader",
-                imageSrc: "/images/team/dain-kim.jpg"
-              },
-              {
-                name: "Brian Chen",
-                role: "Tech Team Leader",
-                imageSrc: "/images/team/brian-chen.jpg"
-              },
-              {
-                name: "Name",
-                role: "Research Team Leader",
-                imageSrc: "/images/team/team-member-3.jpg"
-              },
-              {
-                name: "Laehee Park",
-                role: "Finance Team Leader",
-                imageSrc: "/images/team/laehee-park.jpg"
-              },
-              {
-                name: "Name",
-                role: "Outreach Team Leader",
-                imageSrc: "/images/team/team-member-5.jpg"
-              },
-              {
-                name: "Name",
-                role: "Role description",
-                imageSrc: "/images/team/team-member-6.jpg"
-              },
-              {
-                name: "Name",
-                role: "Role description",
-                imageSrc: "/images/team/team-member-7.jpg"
-              },
-              {
-                name: "Name",
-                role: "Role description",
-                imageSrc: "/images/team/team-member-8.jpg"
-              }
-            ]}
-          />
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-xl">
+            {participantStats.map((stat, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center gap-2 p-6 bg-[#F9FAFB] rounded-xl"
+              >
+                <span className="text-3xl md:text-4xl font-bold text-[#1DADDF]">
+                  {stat.value}
+                </span>
+                <TextMD className="text-center text-[#475467]">
+                  {stat.label}
+                </TextMD>
+              </div>
+            ))}
+          </div>
+
+          {/* Link to participants page */}
+          <Link
+            href="/gycc/participants"
+            className="inline-flex items-center gap-2 text-[#1DADDF] font-semibold hover:text-[#0278A4] transition-colors"
+          >
+            View all participants
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </Container>
       </section>
 
