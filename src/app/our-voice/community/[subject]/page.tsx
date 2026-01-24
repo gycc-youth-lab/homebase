@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Container from '@/components/Container'
 import { DisplayMD } from '@/components/Typography'
 import { ArrowLeft, Eye, Calendar } from 'lucide-react'
-import { ContentRenderer } from '@/lib/contentParser'
+import { MarkdownRenderer } from '@/lib/contentParser'
 
 // Component to handle featured image loading with fallback
 function FeaturedImage({ src, alt }: { src: string; alt: string }) {
@@ -27,6 +27,7 @@ function FeaturedImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         fill
+        unoptimized
         className="object-cover"
         priority
         onError={handleImageError}
@@ -39,6 +40,7 @@ interface OurVoicePost {
   id: string
   subject: string
   content: string
+  contentMD: string
   slug: string
   hashtag: string
   thumbnail: string | null
@@ -172,13 +174,13 @@ export default function CommunityPostPage() {
               </div>
             ) : post.thumbnail ? (
               <FeaturedImage
-                src={`/images/ourvoice/${post.thumbnail}`}
+                src={post.thumbnail}
                 alt={post.subject}
               />
             ) : null}
 
             {/* Content */}
-            <ContentRenderer content={post.content} />
+            <MarkdownRenderer content={post.contentMD || ''} />
 
             {/* Footer */}
             <div className="pt-8 border-t border-[#EAECF0]">

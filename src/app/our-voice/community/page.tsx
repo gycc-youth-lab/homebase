@@ -11,6 +11,7 @@ interface OurVoicePost {
   id: string
   subject: string
   content: string
+  contentMD: string
   slug: string
   hashtag: string
   thumbnail: string | null
@@ -40,9 +41,10 @@ function PostThumbnail({ post }: { post: OurVoicePost }) {
   if (post.thumbnail && !imageError) {
     return (
       <Image
-        src={`/images/ourvoice/${post.thumbnail}`}
+        src={post.thumbnail}
         alt={post.subject}
         fill
+        unoptimized
         className="object-cover group-hover:scale-105 transition-transform duration-300"
         onError={handleImageError}
       />

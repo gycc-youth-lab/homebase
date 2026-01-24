@@ -1,5 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongodb'
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+
+// MinIO client configuration
+const MINIO_ENDPOINT = process.env.MINIO_ENDPOINT || 'gycc-objects.zeabur.app'
+const MINIO_PORT = process.env.MINIO_PORT || '443'
+const MINIO_USE_SSL = process.env.MINIO_USE_SSL !== 'false'
+const MINIO_BUCKET = process.env.MINIO_BUCKET || 'zeabur'
+
+const protocol = MINIO_USE_SSL ? 'https' : 'http'
+const isStandardPort = (MINIO_USE_SSL && MINIO_PORT === '443') || (!MINIO_USE_SSL && MINIO_PORT === '80')
+const endpointUrl = isStandardPort
+  ? `${protocol}://${MINIO_ENDPOINT}`
+  : `${protocol}://${MINIO_ENDPOINT}:${MINIO_PORT}`
+
+const minioClient = new S3Client({
+  endpoint: endpointUrl,
+  region: 'us-east-1',
+  credentials: {
+    accessKeyId: process.env.MINIO_ACCESS_KEY || '',
+    secretAccessKey: process.env.MINIO_SECRET_KEY || '',
+  },
+  forcePathStyle: true,
+})
+
+async function getPresignedThumbnailUrl(filename: string | null): Promise<string | null> {
+  if (!filename) return null
+  try {
+    const command = new GetObjectCommand({
+      Bucket: MINIO_BUCKET,
+      Key: `htdocs-full/upload/thumb/${filename}`,
+    })
+    return await getSignedUrl(minioClient, command, { expiresIn: 3600 })
+  } catch {
+    return null
+  }
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -21,8 +58,8 @@ export async function GET(request: NextRequest) {
       .limit(limit)
       .toArray()
 
-    // Transform posts for frontend
-    const transformedPosts = posts.map(post => ({
+    // Transform posts for frontend with presigned URLs
+    const transformedPosts = await Promise.all(posts.map(async post => ({
       id: post._id.toString(),
       subject: post.subject,
       content: post.content,
@@ -33,12 +70,12 @@ export async function GET(request: NextRequest) {
         .replace(/-+/g, '-')
         .trim(),
       hashtag: post.hashtag,
-      thumbnail: post.thumbnailSv,
+      thumbnail: await getPresignedThumbnailUrl(post.thumbnailSv),
       thumbnailOriginal: post.thumbnailOr,
       videoUrl: post.mUrl,
       createdAt: post.regdate,
       hit: post.hit?.$numberLong || post.hit || 0
-    }))
+    })))
 
     const totalPages = Math.ceil(totalCount / limit)
 
