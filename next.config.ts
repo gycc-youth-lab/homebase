@@ -16,6 +16,17 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'gycc-2020.s3.amazonaws.com',
       },
+      // MinIO (Zeabur) - Public endpoint (standard HTTPS)
+      {
+        protocol: 'https',
+        hostname: 'gycc-objects.zeabur.app',
+      },
+      // MinIO (Zeabur) - Private endpoint (for internal services)
+      {
+        protocol: 'http',
+        hostname: 'minio.zeabur.internal',
+        port: '9000',
+      },
     ],
   },
 };

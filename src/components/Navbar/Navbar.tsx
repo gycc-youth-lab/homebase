@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight } from 'lucide-react';
@@ -57,7 +57,6 @@ const navigation: NavItem[] = [
         label: 'Media',
         children: [
             { label: 'Photos', href: '/media/photos' },
-            { label: 'Videos', href: '/media/videos' },
         ],
     },
     {
@@ -70,6 +69,18 @@ const navigation: NavItem[] = [
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#EAECF0]">
@@ -164,10 +175,10 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed inset-0 top-20 bg-white z-40 md:hidden"
+                        className="fixed inset-0 top-16 bg-white z-40 md:hidden overflow-y-auto"
                     >
                         <Container>
-                            <div className="py-6 space-y-6">
+                            <div className="py-6 space-y-6 pb-24">
                                 {/* Mobile Nav Links */}
                                 <div className="space-y-4">
                                     {navigation.map((item) => (
