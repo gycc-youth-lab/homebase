@@ -8,16 +8,15 @@ import { ImageIcon } from 'lucide-react';
 import Container from '@/components/Container';
 import { DisplayLG, DisplayMD, TextMD, TextLG } from '@/components/Typography';
 
-// MinIO paths (not URLs - these are keys for presigning)
+// MinIO paths (keys for presigning)
 const IMAGE_KEYS = {
-    poster: 'htdocs-full/images/new/gycc2020_img01_1.jpg',
-    logo: 'htdocs-full/images/new/gycc2020_img01_2.png',
-    activitiesOverview: 'htdocs-full/images/new/gycc2020_img01_3.jpg',
+    poster: 'htdocs-full/images/new/gycc2021_img01_1.jpg',
+    logo: 'htdocs-full/images/new/gycc2021_img01_2.png',
+    activitiesOverview: 'htdocs-full/images/new/gycc2021_img01_3.jpg',
 };
 
-const PDF_BASE = 'htdocs-full/gycc2020/pdf';
+const PDF_BASE = 'htdocs-full/gycc2021/pdf';
 
-// Type definitions for action plan categories
 interface ActionPlanCategory {
     id: string;
     title: string;
@@ -37,8 +36,6 @@ const actionPlanCategories: ActionPlanCategory[] = [
             `${PDF_BASE}/1_Urban Cities_Page_4.jpg`,
             `${PDF_BASE}/1_Urban Cities_Page_5.jpg`,
             `${PDF_BASE}/1_Urban Cities_Page_6.jpg`,
-            `${PDF_BASE}/1_Urban Cities_Page_7.jpg`,
-            `${PDF_BASE}/1_Urban Cities_Page_8.jpg`,
         ]
     },
     {
@@ -52,9 +49,6 @@ const actionPlanCategories: ActionPlanCategory[] = [
             `${PDF_BASE}/2_Food_Page_4.jpg`,
             `${PDF_BASE}/2_Food_Page_5.jpg`,
             `${PDF_BASE}/2_Food_Page_6.jpg`,
-            `${PDF_BASE}/2_Food_Page_7.jpg`,
-            `${PDF_BASE}/2_Food_Page_8.jpg`,
-            `${PDF_BASE}/2_Food_Page_9.jpg`,
         ]
     },
     {
@@ -62,18 +56,12 @@ const actionPlanCategories: ActionPlanCategory[] = [
         title: 'Well-Being',
         thumbnailKey: `${PDF_BASE}/pdf_03.jpg`,
         imageKeys: [
-            `${PDF_BASE}/3_Well-Being_Page_01.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_02.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_03.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_04.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_05.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_06.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_07.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_08.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_09.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_10.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_11.jpg`,
-            `${PDF_BASE}/3_Well-Being_Page_12.jpg`,
+            `${PDF_BASE}/3_Well-Being_Page_1.jpg`,
+            `${PDF_BASE}/3_Well-Being_Page_2.jpg`,
+            `${PDF_BASE}/3_Well-Being_Page_3.jpg`,
+            `${PDF_BASE}/3_Well-Being_Page_4.jpg`,
+            `${PDF_BASE}/3_Well-Being_Page_5.jpg`,
+            `${PDF_BASE}/3_Well-Being_Page_6.jpg`,
         ]
     },
     {
@@ -81,13 +69,12 @@ const actionPlanCategories: ActionPlanCategory[] = [
         title: 'Rivers & Oceans',
         thumbnailKey: `${PDF_BASE}/pdf_04.jpg`,
         imageKeys: [
-            `${PDF_BASE}/4_river&oceans_Page_1.jpg`,
-            `${PDF_BASE}/4_river&oceans_Page_2.jpg`,
-            `${PDF_BASE}/4_river&oceans_Page_3.jpg`,
-            `${PDF_BASE}/4_river&oceans_Page_4.jpg`,
-            `${PDF_BASE}/4_river&oceans_Page_5.jpg`,
-            `${PDF_BASE}/4_river&oceans_Page_6.jpg`,
-            `${PDF_BASE}/4_river&oceans_Page_7.jpg`,
+            `${PDF_BASE}/4_Rivers&Oceans_Page_1.jpg`,
+            `${PDF_BASE}/4_Rivers&Oceans_Page_2.jpg`,
+            `${PDF_BASE}/4_Rivers&Oceans_Page_3.jpg`,
+            `${PDF_BASE}/4_Rivers&Oceans_Page_4.jpg`,
+            `${PDF_BASE}/4_Rivers&Oceans_Page_5.jpg`,
+            `${PDF_BASE}/4_Rivers&Oceans_Page_6.jpg`,
         ]
     },
     {
@@ -95,18 +82,12 @@ const actionPlanCategories: ActionPlanCategory[] = [
         title: 'Production & Consumption',
         thumbnailKey: `${PDF_BASE}/pdf_05.jpg`,
         imageKeys: [
-            `${PDF_BASE}/5_Production & Consumption_Page_01.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_02.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_03.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_04.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_05.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_06.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_07.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_08.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_09.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_10.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_11.jpg`,
-            `${PDF_BASE}/5_Production & Consumption_Page_12.jpg`,
+            `${PDF_BASE}/5_Production&Consumption_Page_1.jpg`,
+            `${PDF_BASE}/5_Production&Consumption_Page_2.jpg`,
+            `${PDF_BASE}/5_Production&Consumption_Page_3.jpg`,
+            `${PDF_BASE}/5_Production&Consumption_Page_4.jpg`,
+            `${PDF_BASE}/5_Production&Consumption_Page_5.jpg`,
+            `${PDF_BASE}/5_Production&Consumption_Page_6.jpg`,
         ]
     },
     {
@@ -114,24 +95,17 @@ const actionPlanCategories: ActionPlanCategory[] = [
         title: 'Sustainability',
         thumbnailKey: `${PDF_BASE}/pdf_06.jpg`,
         imageKeys: [
-            `${PDF_BASE}/6_Sustainability_Page_01.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_02.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_03.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_04.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_05.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_06.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_07.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_08.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_09.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_10.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_11.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_12.jpg`,
-            `${PDF_BASE}/6_Sustainability_Page_13.jpg`,
+            `${PDF_BASE}/6_Sustainability_Page_1.jpg`,
+            `${PDF_BASE}/6_Sustainability_Page_2.jpg`,
+            `${PDF_BASE}/6_Sustainability_Page_3.jpg`,
+            `${PDF_BASE}/6_Sustainability_Page_4.jpg`,
+            `${PDF_BASE}/6_Sustainability_Page_5.jpg`,
+            `${PDF_BASE}/6_Sustainability_Page_6.jpg`,
         ]
     },
 ];
 
-const Gycc2020Page: React.FC = () => {
+const Gycc2021Page: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<ActionPlanCategory | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageUrls, setImageUrls] = useState<Record<string, string>>({});
@@ -139,7 +113,6 @@ const Gycc2020Page: React.FC = () => {
 
     useEffect(() => {
         const fetchPresignedUrls = async () => {
-            // Collect all image keys we need
             const allKeys = [
                 IMAGE_KEYS.poster,
                 IMAGE_KEYS.logo,
@@ -169,7 +142,6 @@ const Gycc2020Page: React.FC = () => {
     }, []);
 
     const fetchActionPlanImages = async (category: ActionPlanCategory) => {
-        // Check if we already have the URLs
         const missingKeys = category.imageKeys.filter(key => !imageUrls[key]);
 
         if (missingKeys.length > 0) {
@@ -226,11 +198,11 @@ const Gycc2020Page: React.FC = () => {
                                 weight="semibold"
                                 className="text-center text-[#101828]"
                             >
-                                GYCC 2020
+                                P4G 2021 | Korea
                             </DisplayLG>
                         </div>
                         <TextMD className="text-center text-[#475467] max-w-3xl">
-                            Explore the comprehensive program, action plans, and memories from GYCC 2020 - a pivotal moment in youth climate action.
+                            Explore the comprehensive program, action plans, and key achievements from GYCC 2021 - amplifying youth voices for climate action at the P4G Summit.
                         </TextMD>
                     </div>
                 </Container>
@@ -244,7 +216,7 @@ const Gycc2020Page: React.FC = () => {
                             weight="semibold"
                             className="text-center text-[#101828]"
                         >
-                            Hot Earth needs Cool Youth
+                            Voice of the Earth, Voice for the Earth
                         </DisplayMD>
                     </div>
 
@@ -255,7 +227,7 @@ const Gycc2020Page: React.FC = () => {
                             {imageUrls[IMAGE_KEYS.poster] && (
                                 <Image
                                     src={imageUrls[IMAGE_KEYS.poster]}
-                                    alt="GYCC 2020 Poster"
+                                    alt="GYCC 2021 Poster"
                                     fill
                                     style={{ objectFit: 'cover' }}
                                     className="rounded-lg"
@@ -271,7 +243,7 @@ const Gycc2020Page: React.FC = () => {
                                     {imageUrls[IMAGE_KEYS.logo] && (
                                         <Image
                                             src={imageUrls[IMAGE_KEYS.logo]}
-                                            alt="GYCC 2020 Logo"
+                                            alt="GYCC 2021 Logo"
                                             fill
                                             style={{ objectFit: 'contain', objectPosition: 'left' }}
                                             unoptimized
@@ -284,12 +256,12 @@ const Gycc2020Page: React.FC = () => {
                                         weight="semibold"
                                         className="text-[#1DADDF]"
                                     >
-                                        Hot Earth needs Cool Youth
+                                        Voice of the Earth, Voice for the Earth
                                     </DisplayMD>
 
                                     <TextLG className="text-[#475467]">
                                         <span className="font-semibold text-[#101828]">
-                                            Nov 8<span className="font-normal"> (Sun.)</span> ~ Nov 13<span className="font-normal"> (Fri.)</span>, 2020
+                                            May 22<span className="font-normal"> (Sat.)</span> ~ May 29<span className="font-normal"> (Sat.)</span>, 2021
                                         </span>
                                         <br />
                                         Seoul, Korea
@@ -298,7 +270,7 @@ const Gycc2020Page: React.FC = () => {
                             </div>
 
                             <TextMD className="text-[#475467] leading-relaxed">
-                                In the GYCC 2020 program, <span className="font-semibold text-[#101828]">105 participants from 35 countries</span> were given an opportunity to discuss key themes and share their own action plans for addressing climate change challenges.
+                                In conjunction with the 2021 P4G Seoul Summit, <span className="font-semibold text-[#101828]">67 participants from 36 countries</span> gathered virtually to discuss key climate themes and develop actionable proposals for world leaders.
                             </TextMD>
                         </div>
                     </div>
@@ -307,7 +279,7 @@ const Gycc2020Page: React.FC = () => {
                     <div className="w-full max-w-4xl">
                         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                             <iframe
-                                src="https://www.youtube.com/embed/uOmQnRIen28?autoplay=0&mute=0&rel=0"
+                                src="https://www.youtube.com/embed/JRiW4qEAQf4?autoplay=0&mute=0&rel=0"
                                 className="absolute top-0 left-0 w-full h-full rounded-lg"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -328,7 +300,7 @@ const Gycc2020Page: React.FC = () => {
                             {imageUrls[IMAGE_KEYS.activitiesOverview] && (
                                 <Image
                                     src={imageUrls[IMAGE_KEYS.activitiesOverview]}
-                                    alt="GYCC 2020 Activities Overview"
+                                    alt="GYCC 2021 Activities Overview"
                                     fill
                                     style={{ objectFit: 'contain' }}
                                     className="rounded-lg"
@@ -400,6 +372,46 @@ const Gycc2020Page: React.FC = () => {
                 </Container>
             </section>
 
+            {/* Key Achievements section */}
+            <section className="bg-[#1DADDF] w-full py-24">
+                <Container className="flex flex-col items-center gap-16">
+                    <div className="flex flex-col items-center gap-6 w-full">
+                        <div className="flex flex-col gap-3 w-full">
+                            <TextMD
+                                weight="semibold"
+                                className="text-center text-white/80"
+                            >
+                                Impact
+                            </TextMD>
+                            <DisplayMD
+                                weight="semibold"
+                                className="text-center text-white"
+                            >
+                                Key Achievements
+                            </DisplayMD>
+                        </div>
+                        <TextMD className="text-center text-white/90 max-w-3xl">
+                            GYCC 2021 achieved significant milestones in amplifying youth voices at the international stage.
+                        </TextMD>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                        <div className="bg-white/10 rounded-xl p-8 backdrop-blur-sm">
+                            <h3 className="text-4xl font-bold text-white mb-2">67</h3>
+                            <p className="text-white/80">Youth participants from 36 countries</p>
+                        </div>
+                        <div className="bg-white/10 rounded-xl p-8 backdrop-blur-sm">
+                            <h3 className="text-4xl font-bold text-white mb-2">6</h3>
+                            <p className="text-white/80">Action plans delivered to world leaders</p>
+                        </div>
+                        <div className="bg-white/10 rounded-xl p-8 backdrop-blur-sm">
+                            <h3 className="text-4xl font-bold text-white mb-2">P4G</h3>
+                            <p className="text-white/80">Summit participation and recognition</p>
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
             {/* Photo Gallery section */}
             <section className="bg-[#F9FAFB] w-full py-24">
                 <Container className="flex flex-col items-center gap-16">
@@ -419,10 +431,10 @@ const Gycc2020Page: React.FC = () => {
                             </DisplayMD>
                         </div>
                         <TextMD className="text-center text-[#475467] max-w-3xl">
-                            Relive the moments from GYCC 2020 through our photo collection, capturing the energy, collaboration, and dedication of youth climate leaders from around the world.
+                            Relive the moments from GYCC 2021 through our photo collection, capturing the energy, collaboration, and dedication of youth climate leaders from around the world.
                         </TextMD>
                         <Link
-                            href="/media/photos/2020"
+                            href="/media/photos/2021"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-[#1DADDF] text-white rounded-lg hover:bg-[#1a9bc9] transition-colors"
                         >
                             <ImageIcon className="w-5 h-5" />
@@ -480,4 +492,4 @@ const Gycc2020Page: React.FC = () => {
     );
 };
 
-export default Gycc2020Page;
+export default Gycc2021Page;
