@@ -25,7 +25,7 @@ export default function BlogPostPage() {
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
 
-  const slug = params.slug as string
+  const slug = params?.slug as string
 
   useEffect(() => {
     async function fetchPost() {

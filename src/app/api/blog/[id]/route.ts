@@ -7,7 +7,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const { id } = await params
     const db = await getDatabase()
     
-    let query: { _id?: ObjectId; slug?: string } = {}
+    const query: { _id?: ObjectId; slug?: string } = {}
     
     // Support both ObjectId and slug lookup
     if (ObjectId.isValid(id)) {
