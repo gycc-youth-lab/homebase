@@ -66,7 +66,7 @@ const events: EventData[] = [
 function Gycc2023Content() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const eventParam = searchParams.get('event');
+    const eventParam = searchParams?.get('event') ?? null;
 
     const [activeEvent, setActiveEvent] = useState<string>(() => {
         const validIds = events.map(e => e.id);
