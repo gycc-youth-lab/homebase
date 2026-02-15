@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname: 'minio.zeabur.internal',
         port: '9000',
       },
+      // Google user avatars (for NextAuth)
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
 };

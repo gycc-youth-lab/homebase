@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Container from '@/components/Container';
@@ -67,6 +68,7 @@ const navigation: NavItem[] = [
 ];
 
 const Navbar = () => {
+    const { data: session, status } = useSession();
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -158,6 +160,36 @@ const Navbar = () => {
                                 </div>
                             ))}
                         </div>
+
+                        {/* Auth Section */}
+                        <div className="flex items-center gap-3 ml-4">
+                            {status === "authenticated" && session?.user ? (
+                                <>
+                                    {session.user.image && (
+                                        <Image
+                                            src={session.user.image}
+                                            alt={session.user.name || "User"}
+                                            width={32}
+                                            height={32}
+                                            className="rounded-full"
+                                        />
+                                    )}
+                                    <button
+                                        onClick={() => signOut()}
+                                        className="text-sm font-medium text-[#475467] hover:text-[#182230] transition-colors"
+                                    >
+                                        Sign Out
+                                    </button>
+                                </>
+                            ) : status === "unauthenticated" ? (
+                                <button
+                                    onClick={() => signIn("google")}
+                                    className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
+                                >
+                                    Sign In
+                                </button>
+                            ) : null}
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -221,6 +253,39 @@ const Navbar = () => {
                                             )}
                                         </div>
                                     ))}
+                                </div>
+
+                                {/* Mobile Auth */}
+                                <div className="pt-4 border-t border-[#EAECF0]">
+                                    {status === "authenticated" && session?.user ? (
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                {session.user.image && (
+                                                    <Image
+                                                        src={session.user.image}
+                                                        alt={session.user.name || "User"}
+                                                        width={32}
+                                                        height={32}
+                                                        className="rounded-full"
+                                                    />
+                                                )}
+                                                <span className="text-sm text-[#475467]">{session.user.name}</span>
+                                            </div>
+                                            <button
+                                                onClick={() => { signOut(); setIsOpen(false); }}
+                                                className="text-sm font-medium text-[#475467] hover:text-[#182230]"
+                                            >
+                                                Sign Out
+                                            </button>
+                                        </div>
+                                    ) : status === "unauthenticated" ? (
+                                        <button
+                                            onClick={() => { signIn("google"); setIsOpen(false); }}
+                                            className="w-full px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
+                                        >
+                                            Sign In
+                                        </button>
+                                    ) : null}
                                 </div>
                             </div>
                         </Container>
