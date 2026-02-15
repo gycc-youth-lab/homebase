@@ -181,14 +181,14 @@ const Navbar = () => {
                                         Sign Out
                                     </button>
                                 </>
-                            ) : status === "unauthenticated" ? (
+                            ) : (
                                 <button
                                     onClick={() => signIn("google")}
                                     className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
                                 >
                                     Sign In
                                 </button>
-                            ) : null}
+                            )}
                         </div>
                     </div>
 
@@ -278,14 +278,14 @@ const Navbar = () => {
                                                 Sign Out
                                             </button>
                                         </div>
-                                    ) : status === "unauthenticated" ? (
+                                    ) : (
                                         <button
                                             onClick={() => { signIn("google"); setIsOpen(false); }}
                                             className="w-full px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
                                         >
                                             Sign In
                                         </button>
-                                    ) : null}
+                                    )}
                                 </div>
                             </div>
                         </Container>
