@@ -39,7 +39,7 @@ const PhotoGallery: React.FC<Props> = ({ bucketName, year }) => {
     const fetchPhotos = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`/api/fetch-dynamo?bucketName=${bucketName}`);
+            const response = await fetch(`/api/photos?bucketName=${bucketName}`);
             if (!response.ok) throw new Error('Failed to fetch');
             const { images, count } = await response.json();
             setCount(count);
