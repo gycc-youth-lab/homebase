@@ -4,9 +4,10 @@ import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 import Container from '@/components/Container'
 import { DisplayMD } from '@/components/Typography'
-import { ArrowLeft, Eye, Calendar } from 'lucide-react'
+import { ArrowLeft, Eye, Calendar, Pencil } from 'lucide-react'
 import { MarkdownRenderer } from '@/lib/contentParser'
 
 // Component to handle featured image loading with fallback
@@ -52,6 +53,7 @@ interface OurVoicePost {
 
 export default function CommunityPostPage() {
   const params = useParams()
+  const { data: session } = useSession()
   const [post, setPost] = useState<OurVoicePost | null>(null)
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
@@ -160,6 +162,17 @@ export default function CommunityPostPage() {
                 </div>
               </div>
             </header>
+
+            {/* Edit Post (signed-in users only) */}
+            {session && post.id && (
+              <Link
+                href={`/admin/ourvoice/${post.id}/edit`}
+                className="inline-flex items-center gap-2 text-sm text-[#667085] hover:text-[#1DADDF] transition-colors w-fit"
+              >
+                <Pencil className="w-3.5 h-3.5" />
+                Edit Post
+              </Link>
+            )}
 
             {/* Featured Media */}
             {youtubeId ? (

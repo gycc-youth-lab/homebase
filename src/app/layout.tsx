@@ -5,6 +5,7 @@ import { HeroUIProvider } from "@heroui/react";
 import Container from '@/components/Container';
 import Footer from '@/components/Footer/Footer';
 import Navbar from "@/components/Navbar";
+import SessionProvider from "@/components/SessionProvider";
 
 
 const inter = Inter({
@@ -33,13 +34,15 @@ export default function RootLayout({
       <body
         className="antialiased"
       >
-        <HeroUIProvider>
-          <Navbar />
-          <Container className="pt-16 flex-grow">
-            {children}
-          </Container>
-          <Footer />
-        </HeroUIProvider>
+        <SessionProvider>
+          <HeroUIProvider>
+            <Navbar />
+            <Container className="pt-16 flex-grow">
+              {children}
+            </Container>
+            <Footer />
+          </HeroUIProvider>
+        </SessionProvider>
       </body>
     </html>
   );

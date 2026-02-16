@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Container from '@/components/Container';
@@ -67,8 +68,10 @@ const navigation: NavItem[] = [
 ];
 
 const Navbar = () => {
+    const { data: session, status } = useSession();
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
 
     // Prevent body scroll when mobile menu is open
     useEffect(() => {
@@ -158,6 +161,63 @@ const Navbar = () => {
                                 </div>
                             ))}
                         </div>
+
+                        {/* Auth Section */}
+                        <div className="relative flex items-center ml-4">
+                            {status === "authenticated" && session?.user ? (
+                                <>
+                                    <button
+                                        onClick={() => setAvatarMenuOpen(!avatarMenuOpen)}
+                                        className="flex items-center rounded-full focus:outline-none"
+                                    >
+                                        {session.user.image ? (
+                                            <Image
+                                                src={session.user.image}
+                                                alt={session.user.name || "User"}
+                                                width={32}
+                                                height={32}
+                                                className="rounded-full"
+                                            />
+                                        ) : (
+                                            <div className="w-8 h-8 rounded-full bg-[#1DADDF] flex items-center justify-center text-white text-sm font-semibold">
+                                                {session.user.name?.charAt(0) || "U"}
+                                            </div>
+                                        )}
+                                    </button>
+                                    {avatarMenuOpen && (
+                                        <>
+                                            <div
+                                                className="fixed inset-0 z-40"
+                                                onClick={() => setAvatarMenuOpen(false)}
+                                            />
+                                            <div className="absolute right-0 top-full mt-1 w-44 py-2 bg-white rounded-lg shadow-lg border border-[#EAECF0] z-50">
+                                                <Link
+                                                    href="/admin"
+                                                    onClick={() => setAvatarMenuOpen(false)}
+                                                    className="block px-4 py-2 text-sm text-[#475467] hover:bg-[#F9FAFB] hover:text-[#182230]"
+                                                >
+                                                    Admin
+                                                </Link>
+                                                <div className="my-1 border-t border-[#EAECF0]" />
+                                                <button
+                                                    onClick={() => { signOut(); setAvatarMenuOpen(false); }}
+                                                    className="block w-full text-left px-4 py-2 text-sm text-[#475467] hover:bg-[#F9FAFB] hover:text-[#182230]"
+                                                >
+                                                    Sign Out
+                                                </button>
+                                            </div>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <button
+                                    onClick={() => signIn("google")}
+                                    className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
+                                >
+                                    Sign In
+                                </button>
+                            )}
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -221,6 +281,50 @@ const Navbar = () => {
                                             )}
                                         </div>
                                     ))}
+                                </div>
+
+                                {/* Mobile Auth */}
+                                <div className="pt-4 border-t border-[#EAECF0] space-y-4">
+                                    {status === "authenticated" && session?.user ? (
+                                        <>
+                                            <div className="flex items-center gap-3">
+                                                {session.user.image ? (
+                                                    <Image
+                                                        src={session.user.image}
+                                                        alt={session.user.name || "User"}
+                                                        width={32}
+                                                        height={32}
+                                                        className="rounded-full"
+                                                    />
+                                                ) : (
+                                                    <div className="w-8 h-8 rounded-full bg-[#1DADDF] flex items-center justify-center text-white text-sm font-semibold">
+                                                        {session.user.name?.charAt(0) || "U"}
+                                                    </div>
+                                                )}
+                                                <span className="text-sm text-[#475467]">{session.user.name}</span>
+                                            </div>
+                                            <Link
+                                                href="/admin"
+                                                onClick={() => setIsOpen(false)}
+                                                className="block py-2 text-lg font-semibold text-[#475467] hover:text-[#182230] transition-colors"
+                                            >
+                                                Admin
+                                            </Link>
+                                            <button
+                                                onClick={() => { signOut(); setIsOpen(false); }}
+                                                className="block text-lg font-semibold text-[#475467] hover:text-[#182230] transition-colors"
+                                            >
+                                                Sign Out
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <button
+                                            onClick={() => { signIn("google"); setIsOpen(false); }}
+                                            className="w-full px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
+                                        >
+                                            Sign In
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </Container>

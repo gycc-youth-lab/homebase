@@ -5,7 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Container from '@/components/Container'
 import { DisplayMD, TextMD, TextSM } from '@/components/Typography'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Plus } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 
 interface OurVoicePost {
   id: string
@@ -75,6 +76,7 @@ export default function CommunityPage() {
   const [pagination, setPagination] = useState<Pagination | null>(null)
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
+  const { data: session } = useSession()
 
   useEffect(() => {
     async function fetchPosts() {
@@ -174,6 +176,17 @@ export default function CommunityPage() {
             <TextMD className="text-[#475467] max-w-2xl mx-auto">
               Hear the voices of young people from around the world sharing their perspectives on climate challenges and solutions.
             </TextMD>
+            {session && (
+              <div className="mt-6">
+                <Link
+                  href="/our-voice/community/new"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1DADDF] text-white text-sm font-medium rounded-lg hover:bg-[#1898C7] transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  New Post
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Posts Grid */}
