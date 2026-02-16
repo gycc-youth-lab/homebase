@@ -3,8 +3,59 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
-import { MarkdownRenderer } from '@/lib/contentParser'
+import { ArrowLeft } from 'lucide-react'
+import RichTextEditor from '@/components/RichTextEditor'
+import TurndownService from 'turndown'
+
+const turndown = new TurndownService({
+  headingStyle: 'atx',
+  codeBlockStyle: 'fenced',
+})
+
+turndown.addRule('youtube-iframe', {
+  filter: (node) =>
+    node.nodeName === 'DIV' &&
+    node.getAttribute('data-youtube-video') !== null,
+  replacement: (_content, node) => {
+    const iframe = (node as HTMLElement).querySelector('iframe')
+    const src = iframe?.getAttribute('src') || ''
+    const match = src.match(/\/embed\/([^?]+)/)
+    if (match) {
+      return `\n\nhttps://www.youtube.com/watch?v=${match[1]}\n\n`
+    }
+    return ''
+  },
+})
+
+function markdownToHtml(md: string): string {
+  if (!md) return ''
+  let html = md
+    .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
+    .replace(/^[*-] (.+)$/gm, '<li>$1</li>')
+    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+  html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>')
+  html = html
+    .split('\n')
+    .map(line => {
+      const trimmed = line.trim()
+      if (!trimmed) return ''
+      if (trimmed.startsWith('<')) return trimmed
+      return `<p>${trimmed}</p>`
+    })
+    .filter(Boolean)
+    .join('')
+  return html
+}
 
 interface OurVoiceFormProps {
   mode: 'create' | 'edit'
@@ -21,11 +72,10 @@ interface OurVoiceFormProps {
 export default function OurVoiceForm({ mode, initialData }: OurVoiceFormProps) {
   const router = useRouter()
   const [subject, setSubject] = useState(initialData?.subject || '')
-  const [contentMD, setContentMD] = useState(initialData?.contentMD || '')
+  const [editorHtml, setEditorHtml] = useState('')
   const [hashtag, setHashtag] = useState(initialData?.hashtag || '')
   const [mUrl, setMUrl] = useState(initialData?.videoUrl || '')
   const [actstatus, setActstatus] = useState(initialData?.actstatus || 'Y')
-  const [showPreview, setShowPreview] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
@@ -39,6 +89,7 @@ export default function OurVoiceForm({ mode, initialData }: OurVoiceFormProps) {
         ? '/api/admin/ourvoice'
         : `/api/admin/ourvoice/${initialData!.id}`
 
+      const contentMD = turndown.turndown(editorHtml)
       const body: Record<string, string> = { subject, contentMD, hashtag, mUrl }
       if (mode === 'edit') {
         body.actstatus = actstatus
@@ -96,33 +147,13 @@ export default function OurVoiceForm({ mode, initialData }: OurVoiceFormProps) {
 
         {/* Content */}
         <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <label htmlFor="contentMD" className="block text-sm font-medium text-[#344054]">
-              Content (Markdown)
-            </label>
-            <button
-              type="button"
-              onClick={() => setShowPreview(!showPreview)}
-              className="inline-flex items-center gap-1.5 text-xs text-[#667085] hover:text-[#344054]"
-            >
-              {showPreview ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-              {showPreview ? 'Edit' : 'Preview'}
-            </button>
-          </div>
-          {showPreview ? (
-            <div className="min-h-[200px] p-4 border border-[#D0D5DD] rounded-lg bg-white">
-              <MarkdownRenderer content={contentMD} />
-            </div>
-          ) : (
-            <textarea
-              id="contentMD"
-              value={contentMD}
-              onChange={e => setContentMD(e.target.value)}
-              required
-              rows={12}
-              className="w-full px-3 py-2 border border-[#D0D5DD] rounded-lg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#1DADDF] focus:border-transparent"
-            />
-          )}
+          <label className="block text-sm font-medium text-[#344054] mb-1.5">
+            Content
+          </label>
+          <RichTextEditor
+            content={markdownToHtml(initialData?.contentMD || '')}
+            onChange={setEditorHtml}
+          />
         </div>
 
         {/* Hashtag */}
