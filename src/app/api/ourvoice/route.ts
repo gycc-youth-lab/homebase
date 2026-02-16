@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongodb'
+import { auth } from '@/lib/auth'
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
@@ -94,6 +95,60 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching ourvoice posts:', error)
     return NextResponse.json(
       { error: 'Failed to fetch posts' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await auth()
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const body = await request.json()
+    const { subject, contentMD, hashtag } = body
+
+    if (!subject?.trim()) {
+      return NextResponse.json(
+        { error: 'Subject is required' },
+        { status: 400 }
+      )
+    }
+
+    if (!contentMD?.trim()) {
+      return NextResponse.json(
+        { error: 'Content is required' },
+        { status: 400 }
+      )
+    }
+
+    const db = await getDatabase()
+
+    const newPost = {
+      subject: subject.trim(),
+      contentMD: contentMD.trim(),
+      hashtag: hashtag?.trim() || '',
+      mUrl: '',
+      actstatus: 'Y',
+      hit: 0,
+      regdate: new Date(),
+    }
+
+    const result = await db.collection('ourvoice').insertOne(newPost)
+
+    return NextResponse.json(
+      {
+        message: 'Post created successfully',
+        post: { id: result.insertedId.toString(), ...newPost },
+      },
+      { status: 201 }
+    )
+  } catch (error: unknown) {
+    console.error('Error creating ourvoice post:', error)
+    return NextResponse.json(
+      { error: 'Failed to create post' },
       { status: 500 }
     )
   }
