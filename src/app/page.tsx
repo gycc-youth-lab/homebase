@@ -425,6 +425,7 @@ export default function Home() {
               </TextLG>
               <div className="text-[#475467]">
                 <p className="font-medium text-[#101828]">Hanabank 494-910024-19904</p>
+                <p className="text-sm mt-1">SWIFT Code: HNBNKRSE</p>
                 <p className="text-sm mt-1">글로벌청년기후변화챌린지</p>
                 <p className="text-sm">Global Youth Climate Challenges</p>
               </div>

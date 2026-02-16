@@ -145,6 +145,10 @@ const DonatePage: React.FC = () => {
                                                 <span className="text-[#101828] font-medium">494-910024-19904</span>
                                             </div>
                                             <div className="flex justify-between">
+                                                <span className="text-[#475467]">SWIFT Code:</span>
+                                                <span className="text-[#101828] font-medium">HNBNKRSE</span>
+                                            </div>
+                                            <div className="flex justify-between">
                                                 <span className="text-[#475467]">Account Name:</span>
                                                 <span className="text-[#101828] font-medium">글로벌청년기후변화챌린지</span>
                                             </div>
@@ -197,9 +201,8 @@ const DonatePage: React.FC = () => {
                                 </div>
 
                                 <div className="text-center">
-                                    <TextLG weight="semibold" className="text-[#101828]">Laehee Park</TextLG>
-                                    <TextMD className="text-[#475467]">Finance Team Leader</TextMD>
-                                    <TextMD className="text-[#1DADDF] mt-2">grants@gycc.org</TextMD>
+                                    <TextLG weight="semibold" className="text-[#101828]">Finance Team</TextLG>
+                                    <TextMD className="text-[#1DADDF] mt-2">funds@gyccyouthlab.org</TextMD>
                                 </div>
 
                                 <TextMD className="text-center text-[#475467] mt-2">
